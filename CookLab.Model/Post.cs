@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace CookLab.Model
 {
-    public class Difficulty
+    public class Post
     {
         public int id { get; set; }
-        public string name { get; set; }    
+        public int idUser { get; set; }    
+
+        public int idRecipe { get; set; }
+        public string comment { get; set; }
+        public int rating { get; set; } 
+
+
     }
 }

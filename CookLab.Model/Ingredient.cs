@@ -3,7 +3,7 @@ namespace CookLab.Model
 {
     public class Ingredient
     {
-        public int Id { get; set; } 
-        public string Name { get; set; }    
+        public int id { get; set; } 
+        public string name { get; set; }    
     }
 }
