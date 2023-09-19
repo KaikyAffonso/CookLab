@@ -8,8 +8,8 @@ namespace CookLab.Model
 {
     public class Favorite
     {
-        public int id { get; set; } 
-        public int idUser { get; set; }
-        public int idRecipe { get; set; }
+        public int Id { get; set; } 
+        public User User { get; set; }
+        public Recipe Recipe { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace CookLab.Repository
 {
     internal class SQL
     {
-        private static readonly string _connectionString = @"Server=db.assembly.pt;Database=JD_YV_mcking;Trusted_Connection=True;User Id=Students;Password=SkillUpForTomorrow;Integrated Security=False;";
+        private static readonly string _connectionString = @"Server=db.assembly.pt;Database=JD_YV_KV_CookLab;Trusted_Connection=True;User Id=Students;Password=SkillUpForTomorrow;Integrated Security=False;";
         private static readonly SqlConnection _sqlConnection = new SqlConnection(_connectionString);
         private static bool _isClosed = true;
 

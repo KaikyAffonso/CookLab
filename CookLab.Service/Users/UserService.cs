@@ -8,5 +8,6 @@ namespace CookLab.Service.Users
 {
     public class UserService
     {
+
     }
 }

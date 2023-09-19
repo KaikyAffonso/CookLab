@@ -8,14 +8,14 @@ namespace CookLab.Model
 {
     public class Recipe
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public int idUser { get; set; }
-        public int idCategory { get; set; }
-        public int prepTime { get; set; }
-        public string prepMethod { get; set; }
-        public int idDifficulty { get; set; }
-        public bool approved { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public User Author { get; set; } // UserId
+        public Category Category { get; set; }
+        public int PrepTime { get; set; }
+        public string PrepMethod { get; set; }
+        public Difficulty Difficulty { get; set; }
+        public bool IsApproved { get; set; }
 
     }
 }

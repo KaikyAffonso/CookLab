@@ -8,12 +8,12 @@ namespace CookLab.Model
 {
     public class Post
     {
-        public int id { get; set; }
-        public int idUser { get; set; }    
+        public int Id { get; set; }
+        public User User { get; set; }    
 
-        public int idRecipe { get; set; }
-        public string comment { get; set; }
-        public int rating { get; set; } 
+        public Recipe Recipe { get; set; }
+        public string Comment { get; set; }
+        public int Rating { get; set; } 
 
 
     }

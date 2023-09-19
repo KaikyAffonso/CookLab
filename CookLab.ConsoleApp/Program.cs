@@ -11,7 +11,7 @@ namespace CookLab.ConsoleApp
             IngredientRepository repository = new IngredientRepository();
             IIngredientService service = new IngredientService(repository);
             Ingredient ing = new Ingredient();
-            ing.Name = "Water";
+            ing.Name = "aater";
 
             service.Create(ing);
         }
