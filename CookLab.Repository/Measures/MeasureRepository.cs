@@ -10,7 +10,7 @@ namespace CookLab.Repository.Measures
         private readonly string tableName = "measures";
         public Measure Create(Measure measure)
         {
-            string sql =$"INSERT INTO {tableName} (name) VALUES ({measure.Name});";
+            string sql =$"INSERT INTO {tableName} (name) VALUES ({measure.name});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", tableName);
             return Retrieve(id);
@@ -47,16 +47,16 @@ namespace CookLab.Repository.Measures
 
         public Measure Update(Measure measure)
         {
-            string sql = $"UPDATE {tableName} SET name = {measure.Name} WHERE id = {measure.Id};";
+            string sql = $"UPDATE {tableName} SET name = {measure.name} WHERE id = {measure.id};";
             SQL.ExecuteNonQuery(sql);
-            return Retrieve(measure.Id);
+            return Retrieve(measure.id);
         }
 
         private Measure Parse(SqlDataReader reader)
         {
             Measure measure = new Measure();
-            measure.Id = Convert.ToInt32(reader["id"]);
-            measure.Name = Convert.ToString(reader["name"]);
+            measure.id = Convert.ToInt32(reader["id"]);
+            measure.name = Convert.ToString(reader["name"]);
 
             return measure; 
 

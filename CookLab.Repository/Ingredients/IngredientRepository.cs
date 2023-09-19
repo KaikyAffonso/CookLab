@@ -9,7 +9,7 @@ namespace CookLab.Repository.Ingredients
         private readonly string tableName = "ingredients";
         public Ingredient Create(Ingredient ingredient)
         {
-            string sql = $"INSERT INTO {tableName} (name) VALUES ({ingredient.Name});";
+            string sql = $"INSERT INTO {tableName} (name) VALUES ({ingredient.name});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", tableName);
             return Retrieve(id);
@@ -46,9 +46,9 @@ namespace CookLab.Repository.Ingredients
 
         public Ingredient Update(Ingredient ingredient)
         {
-            string sql = $"UPDATE {tableName} SET name = {ingredient.Name} WHERE id = {ingredient.Id}";
+            string sql = $"UPDATE {tableName} SET name = {ingredient.name} WHERE id = {ingredient.id}";
             SQL.ExecuteNonQuery(sql);
-            return Retrieve(ingredient.Id);
+            return Retrieve(ingredient.id);
         }
 
 
@@ -56,8 +56,8 @@ namespace CookLab.Repository.Ingredients
         private Ingredient Parse(SqlDataReader reader)
         {
             Ingredient ingredient = new Ingredient();
-            ingredient.Id = Convert.ToInt32(reader["id"]);
-            ingredient.Name = Convert.ToString(reader["name"]);
+            ingredient.id = Convert.ToInt32(reader["id"]);
+            ingredient.name = Convert.ToString(reader["name"]);
             return ingredient;
         }
 

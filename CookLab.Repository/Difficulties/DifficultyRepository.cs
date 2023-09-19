@@ -10,7 +10,7 @@ namespace CookLab.Repository.Difficulties
         private readonly string tableName = "difficulties";
         public Difficulty Create(Difficulty difficulty)
         {
-            string sql = $"INSERT INTO {tableName} (name) VALUES ({difficulty.Name});";
+            string sql = $"INSERT INTO {tableName} (name) VALUES ({difficulty.name});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", tableName);
             return Retrieve(id);
@@ -47,15 +47,15 @@ namespace CookLab.Repository.Difficulties
 
         public Difficulty Update(Difficulty difficulty)
         {
-            string sql = $"UPDATE {tableName} SET name = {difficulty.Name} WHERE id = {difficulty.Id}";
+            string sql = $"UPDATE {tableName} SET name = {difficulty.name} WHERE id = {difficulty.id}";
             SQL.ExecuteNonQuery(sql);
-            return Retrieve(difficulty.Id);
+            return Retrieve(difficulty.id);
         }
         private Difficulty Parse(SqlDataReader reader)
         {
             Difficulty difficulty = new Difficulty();
-            difficulty.Id = Convert.ToInt32(reader["id"]);
-            difficulty.Name = Convert.ToString(reader["name"]);
+            difficulty.id = Convert.ToInt32(reader["id"]);
+            difficulty.name = Convert.ToString(reader["name"]);
             return difficulty;
         }
     }

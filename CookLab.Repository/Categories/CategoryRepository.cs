@@ -10,7 +10,7 @@ namespace CookLab.Repository.Categories
         private readonly string tableName = "categories";
         public Category Create(Category category)
         {
-            string sql = $"INSERT INTO {tableName} (name) VALUES ({category.Name});";
+            string sql = $"INSERT INTO {tableName} (name) VALUES ({category.name});";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", tableName);
             return Retrieve(id);
@@ -47,15 +47,15 @@ namespace CookLab.Repository.Categories
 
         public Category Update(Category category)
         {
-            string sql = $"UPDATE {tableName} SET name = {category.Name} WHERE id = {category.Id}";
+            string sql = $"UPDATE {tableName} SET name = {category.name}  WHERE id =  {category.id}";
             SQL.ExecuteNonQuery(sql);
-            return Retrieve(category.Id);
+            return Retrieve(category.id);
         }
         private Category Parse(SqlDataReader reader)
         {
             Category category = new Category();
-            category.Id = Convert.ToInt32(reader["id"]);
-            category.Name = Convert.ToString(reader["name"]);
+            category.id = Convert.ToInt32(reader["id"]);
+            category.name = Convert.ToString(reader["name"]);
             return category;
         }
     }
