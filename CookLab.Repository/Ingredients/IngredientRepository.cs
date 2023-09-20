@@ -12,7 +12,8 @@ namespace CookLab.Repository.Ingredients
             string sql = $"INSERT INTO {tableName} (name) VALUES ('{ingredient.Name}');";
             SQL.ExecuteNonQuery(sql);
             int id = SQL.GetMax("id", tableName);
-            return Retrieve(id);
+             return Retrieve(id);
+            
         }
 
         public void Delete(int id)
@@ -28,6 +29,7 @@ namespace CookLab.Repository.Ingredients
             if (reader.Read())
             {
                 return Parse(reader);
+                
             }
             throw new Exception("Ingredient not found.");
         }
@@ -58,7 +60,9 @@ namespace CookLab.Repository.Ingredients
             Ingredient ingredient = new Ingredient();
             ingredient.Id = Convert.ToInt32(reader["id"]);
             ingredient.Name = Convert.ToString(reader["name"]);
+           
             return ingredient;
+
         }
 
 
