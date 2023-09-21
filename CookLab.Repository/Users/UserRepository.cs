@@ -25,7 +25,8 @@ namespace CookLab.Repository.Users
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            string sql = $"DELETE FROM users WHERE id={id}";
+            SQL.ExecuteNonQuery(sql);   
         }
 
         public User Retrieve(int id)
@@ -41,12 +42,21 @@ namespace CookLab.Repository.Users
 
         public List<User> RetrieveAll()
         {
-            throw new NotImplementedException();
+            string sql = "SELECT * FROM users;";
+            SqlDataReader reader = SQL.Execute(sql);
+            List<User> user = new List<User>();
+            while (reader.Read())
+            {
+                user.Add(Parse(reader));
+            }
+            return user;
         }
 
         public User Update(User user)
         {
-            throw new NotImplementedException();
+            string sql = $"UPDATE user SET username = '{user.Username}', password '{user.Password}', name '{user.Name}' email '{user.Email}' WHERE id = {user.Id};";
+            SQL.ExecuteNonQuery(sql);
+            return Retrieve(user.Id);
         }
 
         private User Parse(SqlDataReader reader)
