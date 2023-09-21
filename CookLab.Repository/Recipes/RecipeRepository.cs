@@ -15,7 +15,7 @@ namespace CookLab.Repository.Recipes
         {
             int isApproved = recipe.IsApproved ? 1 : 0;
 
-            string sql = $"INSERT INTO recipes (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved) " +
+            string sql = $"INSERT INTO {tableName} (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved) " +
                 $"VALUES ('{recipe.Title}', {recipe.Author.Id}, {recipe.Category.Id}, {recipe.PrepTime}, '{recipe.PrepMethod}', {recipe.Difficulty.Id}, {isApproved});";
             SQL.ExecuteNonQuery(sql);
             int maxId = SQL.GetMax("id", tableName);
@@ -26,24 +26,24 @@ namespace CookLab.Repository.Recipes
 
         public void Delete(int id)
         {
-            string sql = $"DELETE FROM recipes WHERE id={id}";
+            string sql = $"DELETE FROM {tableName} WHERE id={id};";
             SQL.ExecuteNonQuery(sql);
         }
 
         public Recipe Retrieve(int id)
         {
-            string sql = $"SELECT * FROM recipes WHERE id = {id};";
+            string sql = $"SELECT * FROM {tableName} WHERE id = {id};";
             SqlDataReader reader = SQL.Execute(sql);
             if (reader.Read())
             {
                 return Parse(reader);
             }
-            throw new KeyNotFoundException($"User de Id: {id} não encontrado.");
+            throw new KeyNotFoundException($"{tableName} de Id: {id} não encontrado.");
         }
 
         public List<Recipe> RetrieveAll()
         {
-            string sql = "SELECT * FROM recipes;";
+            string sql = $"SELECT * FROM {tableName};";
             SqlDataReader reader = SQL.Execute(sql);
             List<Recipe> recipes = new List<Recipe>();
             while (reader.Read())
@@ -55,7 +55,7 @@ namespace CookLab.Repository.Recipes
 
         public Recipe Update(Recipe recipe)
         {
-            string sql = $"UPDATE recipes SET title= '{recipe.Title}', id_user = {recipe.Author.Id}, id_category= {recipe.Category.Id}, prep_time={recipe.PrepTime}, prep_method='{recipe.PrepMethod}', id_difficulty= {recipe.Difficulty.Id};";
+            string sql = $"UPDATE {tableName} SET title= '{recipe.Title}', id_category= {recipe.Category.Id}, prep_time={recipe.PrepTime}, prep_method='{recipe.PrepMethod}', id_difficulty= {recipe.Difficulty.Id} WHERE id= {recipe.Id};";
             SQL.ExecuteNonQuery (sql);
             return Retrieve(recipe.Id);
         }
