@@ -11,6 +11,8 @@ namespace CookLab.Model
         public int Id { get; set; }
         public string Title { get; set; }
         public User Author { get; set; } // UserId
+
+        public List<RecipeIngredient> ingredients { get; set; }
         public Category Category { get; set; }
         public int PrepTime { get; set; }
         public string PrepMethod { get; set; }
