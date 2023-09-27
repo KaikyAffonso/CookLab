@@ -1,6 +1,8 @@
 ﻿using CookLab.Model;
 using CookLab.Repository.Favorites;
 using CookLab.Repository.Posts;
+using CookLab.Service.Recipes;
+using CookLab.Service.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +13,52 @@ namespace CookLab.Service.Favorites
 {
     public class FavoriteService : IFavoriteRepository
     {
-        private IFavoriteRepository repository;
+        private readonly IFavoriteRepository _repository;
+        private readonly IUserService _userService;
+        private readonly IRecipeService _recipeService;
 
-        public FavoriteService(IFavoriteRepository repository)
+        public FavoriteService(IFavoriteRepository repository, IUserService userService, IRecipeService recipeService)
         {
-            this.repository=repository;
+            _repository=repository;
+            _userService=userService;
+            _recipeService=recipeService;   
         }
 
         public Favorite Create(Favorite favorite)
         {
-            return repository.Create(favorite);
+            return _repository.Create(favorite);
         }
 
         public void Delete(int id)
         {
-           repository.Delete(id);
+           _repository.Delete(id);
         }
 
         public Favorite Retrieve(int id)
         {
-            return repository.Retrieve(id); 
+            Favorite favorite = _repository.Retrieve(id);
+            favorite.User = _userService.Retrieve(favorite.User.Id);
+            favorite.Recipe = _recipeService.Retrieve(favorite.Recipe.Id);  
+            return favorite;
         }
 
         public List<Favorite> RetrieveAll()
         {
-           return repository.RetrieveAll();
+           List<Favorite> favorites = _repository.RetrieveAll();
+
+            foreach(Favorite favorite in favorites)
+            {
+                
+                favorite.User = _userService.Retrieve(favorite.User.Id);
+                favorite.Recipe = _recipeService.Retrieve(favorite.Recipe.Id);
+
+            }
+            return favorites;
         }
 
         public Favorite Update(Favorite favorite)
         {
-           return repository.Update(favorite);  
+           return _repository.Update(favorite);  
         }
     }
 }

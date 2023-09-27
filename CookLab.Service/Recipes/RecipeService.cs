@@ -1,6 +1,13 @@
 ﻿using CookLab.Model;
+using CookLab.Repository.Categories;
+using CookLab.Repository.Difficulties;
 using CookLab.Repository.Recipes;
+using CookLab.Repository.RecipesIngredients;
 using CookLab.Repository.Users;
+using CookLab.Service.Categories;
+using CookLab.Service.Difficulties;
+using CookLab.Service.RecipesIngredients;
+using CookLab.Service.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +18,63 @@ namespace CookLab.Service.Recipes
 {
     public class RecipeService : IRecipeService
     {
-        private IRecipeRepository repository;
-
-        public RecipeService(IRecipeRepository repository)
+        private readonly IRecipeRepository _repository;
+        private readonly IUserService _userService;
+        private readonly ICategoryService _categoryService;
+        private readonly IDifficultyService _difficultyService;
+        private readonly IRecipeIngredientService _recipeIngredientService;
+        
+        public RecipeService(IRecipeRepository  recipeRepository, IUserService userService, ICategoryService categoryService, IDifficultyService difficultyService, IRecipeIngredientService recipeIngredientService )
         {
-            this.repository=repository;
+            _repository = recipeRepository;
+            _userService = userService;
+            _categoryService = categoryService;
+            _difficultyService = difficultyService;
+            _recipeIngredientService = recipeIngredientService; 
+
         }
 
         public Recipe Create(Recipe recipe)
         {
-            return repository.Create(recipe);
+            return _repository.Create(recipe);
         }
 
         public void Delete(int id)
         {
-           repository.Delete(id);
+           _repository.Delete(id);
         }
 
         public Recipe Retrieve(int id)
         {
-           return repository.Retrieve(id);
+           Recipe recipe = _repository.Retrieve(id);
+            
+            recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
+            recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
+            recipe.Author = _userService.Retrieve(recipe.Author.Id);
+            recipe.Ingredients = _recipeIngredientService.RetrieveAllByRecipeId(recipe.Id);
+            recipe.Author.Email="";
+            recipe.Author.Password="";
+            return recipe;
         }
 
         public List<Recipe> RetrieveAll()
         {
-            return repository.RetrieveAll();
+            List<Recipe> recipes = _repository.RetrieveAll();
+            foreach(Recipe recipe in recipes) {
+                recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
+                recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
+                recipe.Author = _userService.Retrieve(recipe.Author.Id);
+                recipe.Author.Email="";
+                recipe.Author.Password="";
+
+
+            }
+            return recipes;
         }
 
         public Recipe Update(Recipe recipe)
         {
-            return repository.Update(recipe);   
+            return _repository.Update(recipe);   
         }
     }
 }

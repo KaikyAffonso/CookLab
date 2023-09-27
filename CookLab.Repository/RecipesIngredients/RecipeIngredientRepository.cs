@@ -13,7 +13,7 @@ namespace CookLab.Repository.RecipesIngredients
         private readonly string tableName = "recipe_ingredients";
         public RecipeIngredient Create(RecipeIngredient recipeIngredient)
         {
-            string sql = $"INSERT INTO recipes (id_recipe, id_ingredient, quantity, id_measure) VALUES ({recipeIngredient.Recipe.Id}, {recipeIngredient.Ingredient.Id}, {recipeIngredient.quantity}, {recipeIngredient.Measure.Id});";
+            string sql = $"INSERT INTO {tableName} (id_recipe, id_ingredient, quantity, id_measure) VALUES ({recipeIngredient.Recipe.Id}, {recipeIngredient.Ingredient.Id}, {recipeIngredient.quantity}, {recipeIngredient.Measure.Id});";
             SQL.ExecuteNonQuery(sql);
             int maxId = SQL.GetMax("id", tableName);
             return Retrieve(maxId);
@@ -23,6 +23,11 @@ namespace CookLab.Repository.RecipesIngredients
         {
             string sql = $"DELETE * FROM recipe_ingredients WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
+        }
+
+        public void DeleteAllByRecipeId(int recipeId)
+        {
+            string sql = $"DELETE FROM {tableName} WHERE id_recipe={recipeId};"; 
         }
 
         public RecipeIngredient Retrieve(int id)
@@ -48,7 +53,17 @@ namespace CookLab.Repository.RecipesIngredients
             }
             return recipeIngredients;
         }
+        public List<RecipeIngredient> RetrieveAllByRecipeId(int recipeId) {
 
+            string sql = $"SELECT * FROM {tableName} WHERE id_recipe= {recipeId};";
+            SqlDataReader reader = SQL.Execute(sql);
+            List<RecipeIngredient> ingredients = new List<RecipeIngredient>();
+            while(reader.Read())
+            {
+                ingredients.Add(Parse(reader));
+            }
+        return ingredients;
+        }
         public RecipeIngredient Update(RecipeIngredient recipeIngredient)
         {
             string sql = $"UPDATE recipe_ingredients SET quantity = {recipeIngredient.quantity} WHERE id={recipeIngredient.Id};";

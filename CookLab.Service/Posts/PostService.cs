@@ -1,6 +1,8 @@
 ﻿using CookLab.Model;
 using CookLab.Repository.Posts;
 using CookLab.Repository.Recipes;
+using CookLab.Service.Recipes;
+using CookLab.Service.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +13,50 @@ namespace CookLab.Service.Posts
 {
     public class PostService : IPostService
     {
-        private IPostRepository repository;
+        private readonly IPostRepository _repository;
+        private readonly IUserService _userService;
+        private readonly IRecipeService _recipeService;
 
-        public PostService(IPostRepository repository)
+
+        public PostService(IPostRepository repository, IUserService userService, IRecipeService recipeService)
         {
-            this.repository=repository;
+            _repository=repository;
+            _recipeService= recipeService;
+            _userService=userService;
         }
 
         public Post Create(Post post)
         {
-           return repository.Create(post);  
+           return _repository.Create(post);  
         }
 
         public void Delete(int id)
         {
-            repository.Delete(id);
+            _repository.Delete(id);
         }
 
         public Post Retrieve(int id)
         {
-            return repository.Retrieve(id);
+            Post post=  _repository.Retrieve(id);
+            post.User = _userService.Retrieve(post.User.Id);
+            post.Recipe = _recipeService.Retrieve(post.Recipe.Id);  
+            return post;
         }
 
         public List<Post> RetrieveAll()
         {
-            return repository.RetrieveAll();
+            List<Post> posts= _repository.RetrieveAll();
+
+            foreach(Post post in posts) {
+                post.User = _userService.Retrieve(post.User.Id);
+                post.Recipe = _recipeService.Retrieve(post.Recipe.Id);
+            }
+            return posts;   
         }
 
         public Post Update(Post post)
         {
-            return repository.Update(post);
+            return _repository.Update(post);
         }
     }
 }

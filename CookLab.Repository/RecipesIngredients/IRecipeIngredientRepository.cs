@@ -14,5 +14,7 @@ namespace CookLab.Repository.RecipesIngredients
         List<RecipeIngredient> RetrieveAll();
         RecipeIngredient Update(RecipeIngredient recipeIngredient);
         void Delete(int id);
+        public List<RecipeIngredient> RetrieveAllByRecipeId(int recipeId);
+        public void DeleteAllByRecipeId(int recipeId);
     }
 }
