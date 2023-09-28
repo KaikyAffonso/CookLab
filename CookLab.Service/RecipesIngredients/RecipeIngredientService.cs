@@ -48,6 +48,7 @@ namespace CookLab.Service.RecipesIngredients
         public List<RecipeIngredient> RetrieveAll()
         {
             List<RecipeIngredient> recipeIngredients= _repository.RetrieveAll();
+            
             foreach ( RecipeIngredient recipeIngredient in recipeIngredients)
             {
                 recipeIngredient.Recipe = _recipeService.Retrieve(recipeIngredient.Recipe.Id);

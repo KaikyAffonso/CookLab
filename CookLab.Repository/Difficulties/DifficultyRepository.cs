@@ -30,7 +30,7 @@ namespace CookLab.Repository.Difficulties
             {
                 return Parse(reader);
             }
-            throw new Exception("Ingredient not found.");
+            throw new Exception("Difficulty not found.");
         }
 
         public List<Difficulty> RetrieveAll()

@@ -1,18 +1,10 @@
 ﻿using CookLab.Model;
-using CookLab.Repository.Categories;
-using CookLab.Repository.Difficulties;
 using CookLab.Repository.Recipes;
-using CookLab.Repository.RecipesIngredients;
-using CookLab.Repository.Users;
 using CookLab.Service.Categories;
 using CookLab.Service.Difficulties;
+using CookLab.Service.Ingredients;
 using CookLab.Service.RecipesIngredients;
 using CookLab.Service.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CookLab.Service.Recipes
 {
@@ -22,16 +14,18 @@ namespace CookLab.Service.Recipes
         private readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
         private readonly IDifficultyService _difficultyService;
+        private readonly IIngredientService _ingredientService;
         private readonly IRecipeIngredientService _recipeIngredientService;
+       
         
-        public RecipeService(IRecipeRepository  recipeRepository, IUserService userService, ICategoryService categoryService, IDifficultyService difficultyService, IRecipeIngredientService recipeIngredientService )
+        public RecipeService(IRecipeRepository  recipeRepository, IUserService userService, ICategoryService categoryService, IDifficultyService difficultyService, IIngredientService ingredientService)
         {
             _repository = recipeRepository;
             _userService = userService;
             _categoryService = categoryService;
             _difficultyService = difficultyService;
-            _recipeIngredientService = recipeIngredientService; 
-
+            _ingredientService = ingredientService;
+          
         }
 
         public Recipe Create(Recipe recipe)
@@ -50,8 +44,7 @@ namespace CookLab.Service.Recipes
             
             recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
             recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
-            recipe.Author = _userService.Retrieve(recipe.Author.Id);
-            recipe.Ingredients = _recipeIngredientService.RetrieveAllByRecipeId(recipe.Id);
+            recipe.Author = _userService.Retrieve(recipe.Author.Id);          
             recipe.Author.Email="";
             recipe.Author.Password="";
             return recipe;
@@ -60,14 +53,15 @@ namespace CookLab.Service.Recipes
         public List<Recipe> RetrieveAll()
         {
             List<Recipe> recipes = _repository.RetrieveAll();
-            foreach(Recipe recipe in recipes) {
+         
+            foreach (Recipe recipe in recipes) {
                 recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
                 recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
-                recipe.Author = _userService.Retrieve(recipe.Author.Id);
+                recipe.Author = _userService.Retrieve(recipe.Author.Id);              
                 recipe.Author.Email="";
                 recipe.Author.Password="";
-
-
+                
+            
             }
             return recipes;
         }
