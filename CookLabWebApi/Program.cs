@@ -27,24 +27,24 @@ namespace CookLabWebApi
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
+           /* builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
             builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
             builder.Services.AddScoped<IIngredientRepository , IngredientRepository>();
             builder.Services.AddScoped<IMeasureRepository, MeasureRepository>();
             builder.Services.AddScoped<IPostRepository, PostRepository>();
             builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
             builder.Services.AddScoped<IRecipeIngredientRepository,  RecipeIngredientRepository>();
-            builder.Services.AddScoped<IUserRepository , UserRepository>(); 
+            builder.Services.AddScoped<IUserRepository , UserRepository>(); */
 
             builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddScoped<IDifficultyService, DifficultyService>();
+           /* builder.Services.AddScoped<IDifficultyService, DifficultyService>();
             builder.Services.AddScoped<IFavoriteService, FavoriteService>();
             builder.Services.AddScoped<IIngredientService, IngredientService>();
             builder.Services.AddScoped<IMeasureService,  MeasureService>();
             builder.Services.AddScoped<IPostService, PostService>();
             builder.Services.AddScoped<IRecipeService, RecipeService>();
             builder.Services.AddScoped<IRecipeIngredientService, RecipeIngredientService>();
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserService, UserService>();*/
 
 
             builder.Services.AddControllers();

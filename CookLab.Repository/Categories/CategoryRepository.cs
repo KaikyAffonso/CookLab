@@ -30,7 +30,7 @@ namespace CookLab.Repository.Categories
             {
                 return Parse(reader);
             }
-            throw new Exception("Ingredient not found.");
+            throw new Exception("Category not found.");
         }
 
         public List<Category> RetrieveAll()

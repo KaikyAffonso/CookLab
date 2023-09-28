@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CookLab.Service.Favorites
 {
-    public class FavoriteService : IFavoriteRepository
+    public class FavoriteService : IFavoriteService
     {
         private readonly IFavoriteRepository _repository;
         private readonly IUserService _userService;
