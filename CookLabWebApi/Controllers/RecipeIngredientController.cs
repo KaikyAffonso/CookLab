@@ -11,11 +11,16 @@ namespace CookLabWebApi.Controllers
     public class RecipeIngredientController : ControllerBase
     {
         private readonly IRecipeIngredientService _recipeIngredientService;
+        public RecipeIngredientController(IRecipeIngredientService recipeIngredientService){
+
+            _recipeIngredientService = recipeIngredientService;
+
+}
         // GET: api/<RecipeIngredientController>
-        [HttpGet]
-        public IEnumerable<RecipeIngredient> Get()
+        [HttpGet("recipe/{recipeId}")]
+        public IEnumerable<RecipeIngredient> GetByRecipeId(int recipeId)
         {
-            return _recipeIngredientService.RetrieveAll();
+            return _recipeIngredientService.RetrieveAllByRecipeId(recipeId);
         }
 
         // GET api/<RecipeIngredientController>/5
@@ -33,10 +38,10 @@ namespace CookLabWebApi.Controllers
         }
 
         // PUT api/<RecipeIngredientController>/5
-        [HttpPut("{id}")]
-        public RecipeIngredient Put(int id, [FromBody] RecipeIngredient recipe)
+        [HttpDelete("recipe/{id}")]
+        public void DeleteAllByRecipeId(int id)
         {
-          return  _recipeIngredientService.Update(recipe);
+            _recipeIngredientService.DeleteAllByRecipeId(id);
 
         }
 

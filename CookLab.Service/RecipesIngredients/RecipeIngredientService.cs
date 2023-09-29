@@ -14,14 +14,14 @@ namespace CookLab.Service.RecipesIngredients
 {
     public class RecipeIngredientService : IRecipeIngredientService
     {
-        private readonly IRecipeIngredientRepository _repository;
-        private readonly IRecipeService _recipeService;
+        private readonly IRecipeIngredientRepository _repository; 
         private readonly IIngredientService _ingredientService;
         private readonly IMeasureService _measureService;
-        public RecipeIngredientService(IRecipeIngredientRepository repository, IRecipeService recipeService, IIngredientService ingredientService,IMeasureService measureService)
+
+
+        public RecipeIngredientService(IRecipeIngredientRepository repository, IIngredientService ingredientService,IMeasureService measureService)
         {
-            _repository=repository;
-            _recipeService=recipeService;
+            _repository=repository;         
             _ingredientService=ingredientService;
             _measureService=measureService;
         }
@@ -38,34 +38,27 @@ namespace CookLab.Service.RecipesIngredients
 
         public RecipeIngredient Retrieve(int id)
         {
-           RecipeIngredient recipeIngredient = _repository.Retrieve(id);
-            recipeIngredient.Recipe = _recipeService.Retrieve(recipeIngredient.Recipe.Id);
+            RecipeIngredient recipeIngredient = _repository.Retrieve(id);          
             recipeIngredient.Ingredient = _ingredientService.Retrieve(recipeIngredient.Ingredient.Id);
             recipeIngredient.Measure = _measureService.Retrieve(recipeIngredient.Measure.Id);
             return recipeIngredient;    
         }
 
-        public List<RecipeIngredient> RetrieveAll()
+       
+
+       
+        public List<RecipeIngredient> RetrieveAllByRecipeId(int recipeId)
         {
-            List<RecipeIngredient> recipeIngredients= _repository.RetrieveAll();
-            
-            foreach ( RecipeIngredient recipeIngredient in recipeIngredients)
+            List<RecipeIngredient> recipeIngredients = _repository.RetrieveAllByRecipeId(recipeId);
+
+            foreach (RecipeIngredient recipeIngredient in recipeIngredients)
             {
-                recipeIngredient.Recipe = _recipeService.Retrieve(recipeIngredient.Recipe.Id);
+               
                 recipeIngredient.Ingredient = _ingredientService.Retrieve(recipeIngredient.Ingredient.Id);
                 recipeIngredient.Measure = _measureService.Retrieve(recipeIngredient.Measure.Id);
 
             }
             return recipeIngredients;
-        }
-
-        public RecipeIngredient Update(RecipeIngredient recipeIngredient)
-        {
-            return _repository.Update(recipeIngredient);
-        }
-        public List<RecipeIngredient> RetrieveAllByRecipeId(int recipeId)
-        {
-            return _repository.RetrieveAllByRecipeId(recipeId);
         }
         public void DeleteAllByRecipeId(int recipeId)
         {

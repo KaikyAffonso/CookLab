@@ -40,8 +40,8 @@ namespace CookLabWebApi.Controllers
         }
 
         // PUT api/<RecipeController>/5
-        [HttpPut("{id}")]
-        public Recipe Put(int id, [FromBody] Recipe recipe)
+        [HttpPut]
+        public Recipe Put([FromBody] Recipe recipe)
         {
            return _service.Update(recipe);
         }

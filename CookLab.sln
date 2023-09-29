@@ -16,6 +16,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookLabWebApi", "CookLabWeb
 		{36313CBF-F1F8-4447-BFC9-C497659AE065} = {36313CBF-F1F8-4447-BFC9-C497659AE065}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CookLabWeb", "CookLabWeb\CookLabWeb.csproj", "{B89CA68A-FA92-4AD3-8CE1-7CCD8F2698C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{36313CBF-F1F8-4447-BFC9-C497659AE065} = {36313CBF-F1F8-4447-BFC9-C497659AE065}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +47,10 @@ Global
 		{60E5B4BC-E014-40D1-A729-C9BD3B77AFED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E5B4BC-E014-40D1-A729-C9BD3B77AFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E5B4BC-E014-40D1-A729-C9BD3B77AFED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B89CA68A-FA92-4AD3-8CE1-7CCD8F2698C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B89CA68A-FA92-4AD3-8CE1-7CCD8F2698C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B89CA68A-FA92-4AD3-8CE1-7CCD8F2698C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B89CA68A-FA92-4AD3-8CE1-7CCD8F2698C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,8 +16,7 @@ namespace CookLab.Repository.Users
         {
             int isBlocked = user.IsBlocked ? 1 : 0;
             int isAdmin = user.IsAdmin ? 1 : 0;
-            string sql = $"INSERT INTO users (username, password, name, email, is_admin, is_blocked) " +
-                $"VALUES ('{user.Username}', '{user.Password}', '{user.Name}', '{user.Email}', {isAdmin}, {isBlocked});";
+            string sql = $"INSERT INTO {tableName} (username, password, name, email, is_admin, is_blocked) VALUES ('{user.Username}', CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2), '{user.Name}', '{user.Email}', '{isAdmin}', '{isBlocked}');";
             SQL.ExecuteNonQuery(sql);
             int maxId = SQL.GetMax("id", tableName);
             return Retrieve(maxId);
@@ -26,7 +25,7 @@ namespace CookLab.Repository.Users
         public void Delete(int id)
         {
             string sql = $"DELETE FROM users WHERE id={id}";
-            SQL.ExecuteNonQuery(sql);   
+            SQL.ExecuteNonQuery(sql);
         }
 
         public User Retrieve(int id)
@@ -54,7 +53,16 @@ namespace CookLab.Repository.Users
 
         public User Update(User user)
         {
-            string sql = $"UPDATE user SET username = '{user.Username}', password '{user.Password}', name '{user.Name}' email '{user.Email}' WHERE id = {user.Id};";
+
+            int isAdmin = user.IsAdmin ? 1 : 0;
+            int isBlocked = user.IsBlocked ? 1 : 0;
+            string sql = $"UPDATE {tableName} SET" +
+                $" password = CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2)," +
+                $" name = '{user.Name}'," +
+                $" email = '{user.Email}'," +
+                $" is_admin = '{isAdmin}'," +
+                $" is_blocked = '{isBlocked}'," +
+                $" WHERE id = {user.Id}";
             SQL.ExecuteNonQuery(sql);
             return Retrieve(user.Id);
         }

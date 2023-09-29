@@ -18,13 +18,14 @@ namespace CookLab.Service.Recipes
         private readonly IRecipeIngredientService _recipeIngredientService;
        
         
-        public RecipeService(IRecipeRepository  recipeRepository, IUserService userService, ICategoryService categoryService, IDifficultyService difficultyService, IIngredientService ingredientService)
+        public RecipeService(IRecipeRepository  recipeRepository, IUserService userService, IRecipeIngredientService recipeIngredientService, ICategoryService categoryService, IDifficultyService difficultyService, IIngredientService ingredientService)
         {
             _repository = recipeRepository;
             _userService = userService;
             _categoryService = categoryService;
             _difficultyService = difficultyService;
             _ingredientService = ingredientService;
+            _recipeIngredientService= recipeIngredientService;
           
         }
 
@@ -42,6 +43,7 @@ namespace CookLab.Service.Recipes
         {
            Recipe recipe = _repository.Retrieve(id);
             
+            recipe.Ingredient = _recipeIngredientService.RetrieveAllByRecipeId(recipe.Id);
             recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
             recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
             recipe.Author = _userService.Retrieve(recipe.Author.Id);          
@@ -55,6 +57,7 @@ namespace CookLab.Service.Recipes
             List<Recipe> recipes = _repository.RetrieveAll();
          
             foreach (Recipe recipe in recipes) {
+                
                 recipe.Difficulty = _difficultyService.Retrieve(recipe.Difficulty.Id);
                 recipe.Category= _categoryService.Retrieve(recipe.Category.Id);
                 recipe.Author = _userService.Retrieve(recipe.Author.Id);              

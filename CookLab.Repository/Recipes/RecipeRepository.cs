@@ -66,6 +66,7 @@ namespace CookLab.Repository.Recipes
             recipe.Author = new User();
             recipe.Category = new Category();
             recipe.Difficulty= new Difficulty();
+         //   recipe.Ingredient = new List<Ingredient>();
             recipe.Id = Convert.ToInt32(reader["id"]);
             recipe.Title= Convert.ToString(reader["title"]);
             recipe.Author.Id= Convert.ToInt32(reader["id_user"]);

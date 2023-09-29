@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace CookLab.Repository.RecipesIngredients
 {
     public class RecipeIngredientRepository : IRecipeIngredientRepository
+
     {
         private readonly string tableName = "recipe_ingredients";
         public RecipeIngredient Create(RecipeIngredient recipeIngredient)
@@ -42,17 +43,7 @@ namespace CookLab.Repository.RecipesIngredients
             throw new KeyNotFoundException($"Ingredient de Id: {id} não encontrado.");
         }
 
-        public List<RecipeIngredient> RetrieveAll()
-        {
-            string sql = "SELECT * FROM recipe_ingredients;";
-            SqlDataReader reader = SQL.Execute(sql);
-            List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
-            while (reader.Read())
-            {
-                recipeIngredients.Add(Parse(reader));
-            }
-            return recipeIngredients;
-        }
+       
         public List<RecipeIngredient> RetrieveAllByRecipeId(int recipeId) {
 
             string sql = $"SELECT * FROM {tableName} WHERE id_recipe= {recipeId};";
@@ -64,24 +55,25 @@ namespace CookLab.Repository.RecipesIngredients
             }
         return ingredients;
         }
-        public RecipeIngredient Update(RecipeIngredient recipeIngredient)
-        {
-            string sql = $"UPDATE recipe_ingredients SET quantity = {recipeIngredient.quantity} WHERE id={recipeIngredient.Id};";
-            SQL.ExecuteNonQuery (sql);
-            return Retrieve(recipeIngredient.Id);
-        }
+      
 
         private RecipeIngredient Parse(SqlDataReader reader)
         {
             RecipeIngredient recipeIngredient = new RecipeIngredient();
-            recipeIngredient.Recipe = new Recipe();
-            recipeIngredient.Ingredient = new Ingredient();
-            recipeIngredient.Measure = new Measure();
             recipeIngredient.Id = Convert.ToInt32(reader["id"]);
-            recipeIngredient.Recipe.Id= Convert.ToInt32(reader["id_recipe"]);
+
+            Ingredient ingredient = new Ingredient();
+            ingredient.Id = Convert.ToInt32(reader["id_ingredient"]);
+            recipeIngredient.Ingredient = ingredient;
+
+            recipeIngredient.Ingredient = new Ingredient();
             recipeIngredient.Ingredient.Id= Convert.ToInt32(reader["id_ingredient"]);
-            recipeIngredient.quantity= Convert.ToDecimal(reader["quantity"]);
+
+            recipeIngredient.Measure = new Measure();
             recipeIngredient.Measure.Id= Convert.ToInt32(reader["id_measure"]);
+       
+            recipeIngredient.quantity= Convert.ToInt64(reader["quantity"]);
+            
 
             return recipeIngredient;
 

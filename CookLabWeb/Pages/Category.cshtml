@@ -1,0 +1,31 @@
+﻿@page
+@model CookLabWeb.Pages.CategoryModel
+@{
+    <form method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input name="name" class="form-control" placeholder="Enter Name">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.categories)
+            {
+                <tr>
+                    <th scope="row">@category.Id</th>
+                    <td>@category.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

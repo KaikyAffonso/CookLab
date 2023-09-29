@@ -35,7 +35,7 @@ namespace CookLab.Repository.Categories
 
         public List<Category> RetrieveAll()
         {
-            string sql = $"SELECT * FROM {tableName};";
+            string sql = $"SELECT * FROM {tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Category> categories = new List<Category>();
             while (reader.Read())
