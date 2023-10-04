@@ -3,20 +3,20 @@ using CookLab.Service.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CookLabWeb.Pages
+namespace CookLabWeb.Pages.CookLabObjects
 {
     public class CategoryModel : PageModel
     {
         private readonly ICategoryService _service;
-       public CategoryModel(ICategoryService service)
+        public CategoryModel(ICategoryService service)
         {
-            _service=service;
-        }   
+            _service = service;
+        }
 
-       public List<Category> categories { get; set; }
+        public List<Category> categories { get; set; }
         public void OnGet()
         {
-           categories = _service.RetrieveAll();
+            categories = _service.RetrieveAll();
         }
 
         public void OnPost()

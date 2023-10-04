@@ -1,0 +1,31 @@
+﻿@page
+@model CookLabWeb.Pages.CookLabObjects.MeasureModel
+@{
+    <form method="post">
+        <div class="form-group">
+            <label>Measure</label>
+            <input name="name" class="form-control" placeholder="Enter Measure">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Measure</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var measure in Model._measures)
+            {
+                <tr>
+                    <th scope="row">@measure.Id</th>
+                    <td>@measure.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

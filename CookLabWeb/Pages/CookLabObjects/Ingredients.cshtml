@@ -1,10 +1,11 @@
 ﻿@page
-@model CookLabWeb.Pages.CategoryModel
+@model CookLabWeb.Pages.CookLabObjects.IngredientsModel
 @{
+
     <form method="post">
         <div class="form-group">
-            <label>Name</label>
-            <input name="name" class="form-control" placeholder="Enter Name">
+            <label>Ingredient</label>
+            <input name="name" class="form-control" placeholder="Enter Ingridient">
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -14,18 +15,21 @@
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">Name</th>
+                <th scope="col">Ingredient</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in Model.categories)
+            @foreach (var ingredent in Model._ingredients)
             {
                 <tr>
-                    <th scope="row">@category.Id</th>
-                    <td>@category.Name</td>
+                    <th scope="row">@ingredent.Id</th>
+                    <td>@ingredent.Name</td>
                 </tr>
             }
         </tbody>
     </table>
+
+
+
 
 }
