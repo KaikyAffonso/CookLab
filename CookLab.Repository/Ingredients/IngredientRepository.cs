@@ -36,7 +36,7 @@ namespace CookLab.Repository.Ingredients
 
         public List<Ingredient> RetrieveAll()
         {
-            string sql = $"SELECT * FROM {tableName};";
+            string sql = $"SELECT * FROM {tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Ingredient> ingredients = new List<Ingredient>();
             while (reader.Read())

@@ -35,7 +35,7 @@ namespace CookLab.Repository.Measures
 
         public List<Measure> RetrieveAll()
         {
-            string sql = $"SELECT * FROM {tableName};";
+            string sql = $"SELECT * FROM {tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Measure> measures = new List<Measure>();
             while (reader.Read())

@@ -35,7 +35,7 @@ namespace CookLab.Repository.Difficulties
 
         public List<Difficulty> RetrieveAll()
         {
-            string sql = $"SELECT * FROM {tableName};";
+            string sql = $"SELECT * FROM {tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Difficulty> difficulties = new List<Difficulty>();
             while (reader.Read())

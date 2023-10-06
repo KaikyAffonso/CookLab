@@ -38,7 +38,7 @@ namespace CookLab.Repository.Favorites
 
         public List<Favorite> RetrieveAll()
         {
-            string sql = $"SELECT * FROM {tableName};";
+            string sql = $"SELECT * FROM {tableName} ORDER BY id ASC;";
             SqlDataReader reader = SQL.Execute(sql);
             List<Favorite> favorites = new List<Favorite>();
             while (reader.Read())

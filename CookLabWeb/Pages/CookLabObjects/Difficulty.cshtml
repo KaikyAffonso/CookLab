@@ -1,0 +1,30 @@
+﻿@page
+@model CookLabWeb.Pages.CookLabObjects.DifficultyModel
+@{
+    <form method="post">
+        <div class="form-group">
+            <label>Name</label>
+            <input name="name" class="form-control" placeholder="Enter Difficulty">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var difficulty in Model._difficulties)
+            {
+                <tr>
+                    <th scope="row">@difficulty.Id</th>
+                    <td>@difficulty.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
