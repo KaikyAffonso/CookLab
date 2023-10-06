@@ -3,7 +3,7 @@ using CookLab.Service.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CookLabWeb.Pages.CookLabObjects
+namespace CookLabWeb.Pages.Categories
 {
     public class CategoryModel : PageModel
     {

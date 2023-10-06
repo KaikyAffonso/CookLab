@@ -1,5 +1,5 @@
 ﻿@page
-@model CookLabWeb.Pages.CookLabObjects.IngredientsModel
+@model IngredientModel
 @{
 
     <form method="post">
@@ -16,14 +16,20 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Ingredient</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var ingredent in Model._ingredients)
+            @foreach (var ingredient in Model._ingredients)
             {
                 <tr>
-                    <th scope="row">@ingredent.Id</th>
-                    <td>@ingredent.Name</td>
+                    <th scope="row">@ingredient.Id</th>
+                    <td>@ingredient.Name</td>
+                    <td>
+                        <a asp-page="/Ingredients/Update" asp-route-id="@ingredient.Id">Update</a> /
+                        <a asp-page="/Ingredients/Delete" asp-route-id="@ingredient.Id">Delete</a> /
+                        <a asp-page="/Ingredients/Retrieve" asp-route-id="@ingredient.Id">View</a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -3,7 +3,7 @@ using CookLab.Service.Difficulties;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CookLabWeb.Pages.CookLabObjects
+namespace CookLabWeb.Pages.Difficulties
 {
     public class DifficultyModel : PageModel
     {
@@ -23,9 +23,9 @@ namespace CookLabWeb.Pages.CookLabObjects
         public void OnPost()
         {
             Difficulty difficulty = new Difficulty();
-            difficulty.Name= Convert.ToString(Request.Form["Name"]);
+            difficulty.Name = Convert.ToString(Request.Form["Name"]);
             _service.Create(difficulty);
-          _difficulties =  _service.RetrieveAll();
+            _difficulties = _service.RetrieveAll();
 
 
         }

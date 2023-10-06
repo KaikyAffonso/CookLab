@@ -1,5 +1,5 @@
 ﻿@page
-@model CookLabWeb.Pages.CookLabObjects.MeasureModel
+@model MeasureModel
 @{
     <form method="post">
         <div class="form-group">
@@ -15,6 +15,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Measure</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,11 @@
                 <tr>
                     <th scope="row">@measure.Id</th>
                     <td>@measure.Name</td>
+                    <td>
+                        <a asp-page="/Measures/Update" asp-route-id="@measure.Id">Update</a> /
+                        <a asp-page="/Measures/Delete" asp-route-id="@measure.Id">Delete</a> /
+                        <a asp-page="/Measures/Retrieve" asp-route-id="@measure.Id">View</a>
+                    </td>
                 </tr>
             }
         </tbody>

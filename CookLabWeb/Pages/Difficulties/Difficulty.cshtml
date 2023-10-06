@@ -1,5 +1,5 @@
 ﻿@page
-@model CookLabWeb.Pages.CookLabObjects.DifficultyModel
+@model DifficultyModel
 @{
     <form method="post">
         <div class="form-group">
@@ -15,6 +15,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Name</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,11 @@
                 <tr>
                     <th scope="row">@difficulty.Id</th>
                     <td>@difficulty.Name</td>
+                    <td>
+                        <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id">Update</a> /
+                        <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id">Delete</a> /
+                        <a asp-page="/Difficulties/Retrieve" asp-route-id="@difficulty.Id">View</a>
+                    </td>
                 </tr>
             }
         </tbody>

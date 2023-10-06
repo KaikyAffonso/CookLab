@@ -1,0 +1,14 @@
+﻿@page
+@model CookLabWeb.Pages.Measures.UpdateModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label>Id</label>
+        <input readonly name="id" class="form-control" value="@Model.Measure.Id">
+        <label>Name</label>
+        <input name="name" class="form-control" value="@Model.Measure.Name">
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
