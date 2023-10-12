@@ -25,9 +25,9 @@
                     <th scope="row">@measure.Id</th>
                     <td>@measure.Name</td>
                     <td>
-                        <a asp-page="/Measures/Update" asp-route-id="@measure.Id">Update</a> /
-                        <a asp-page="/Measures/Delete" asp-route-id="@measure.Id">Delete</a> /
-                        <a asp-page="/Measures/Retrieve" asp-route-id="@measure.Id">View</a>
+                        <a asp-page="/Measures/Update" asp-route-id="@measure.Id"><button type="button" class="btn btn-primary btn-sm">Update</button></a> /
+                        <a asp-page="/Measures/Delete" asp-route-id="@measure.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a> /
+                        <a asp-page="/Measures/Retrieve" asp-route-id="@measure.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
                     </td>
                 </tr>
             }

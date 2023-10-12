@@ -25,9 +25,9 @@
                     <th scope="row">@difficulty.Id</th>
                     <td>@difficulty.Name</td>
                     <td>
-                        <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id">Update</a> /
-                        <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id">Delete</a> /
-                        <a asp-page="/Difficulties/Retrieve" asp-route-id="@difficulty.Id">View</a>
+                        <a asp-page="/Difficulties/Update" asp-route-id="@difficulty.Id"><button type="button" class="btn btn-primary btn-sm">Update</button></a> /
+                        <a asp-page="/Difficulties/Delete" asp-route-id="@difficulty.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a> /
+                        <a asp-page="/Difficulties/Retrieve" asp-route-id="@difficulty.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
                     </td>
                 </tr>
             }

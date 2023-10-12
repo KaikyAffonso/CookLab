@@ -57,12 +57,13 @@ namespace CookLab.Repository.Users
             int isAdmin = user.IsAdmin ? 1 : 0;
             int isBlocked = user.IsBlocked ? 1 : 0;
             string sql = $"UPDATE {tableName} SET" +
+                $" username = '{user.Username}'," +
                 $" password = CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2)," +
                 $" name = '{user.Name}'," +
                 $" email = '{user.Email}'," +
                 $" is_admin = '{isAdmin}'," +
-                $" is_blocked = '{isBlocked}'," +
-                $" WHERE id = {user.Id}";
+                $" is_blocked = '{isBlocked}' " +
+                $" WHERE id = {user.Id};";
             SQL.ExecuteNonQuery(sql);
             return Retrieve(user.Id);
         }

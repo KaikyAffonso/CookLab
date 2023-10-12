@@ -1,0 +1,32 @@
+﻿@page
+@model CookLabWeb.Pages.Users.RetrieveModel
+@{
+}
+<table class="table">
+    <tbody>
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">IsAdmin</th>
+            <th scope="col">IsBlocked</th>
+        </tr>
+    </thead>
+    <tr>
+        <th scope="row">@Model.User.Id</th>
+        <td>@Model.User.Name</td>
+        <td>@Model.User.Username</td>
+        <td>@Model.User.Email</td>
+        <td>@Model.User.IsAdmin</td>
+        <td>@Model.User.IsBlocked</td>
+
+        <td>
+            <a asp-page="/Users/Update" asp-route-id="Model.User.Id"><i class="fa-regular fa-pen-to-square"></i></a> /
+            <a asp-page="/Users/Delete" asp-route-id="Model.User.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a> /
+            <a asp-page="/Users/Retrieve" asp-route-id="Model.User.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
+        </td>
+    </tr>
+    </tbody>
+</table>

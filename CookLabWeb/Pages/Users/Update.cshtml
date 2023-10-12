@@ -1,0 +1,42 @@
+﻿@page
+@model CookLabWeb.Pages.Users.UpdateModel
+@{
+}
+<form method="post">
+    <div class="form-group">
+        <label>Id</label>
+        <input readonly name="id" class="form-control" value="@Model.User.Id">
+        <label>Name</label>
+        <input name="name" class="form-control" value="@Model.User.Name">
+        <label>Username</label>
+        <input name="username" class="form-control" value="@Model.User.Username">
+        <label>Email</label>
+        <input name="Email" class="form-control" value="@Model.User.Email">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" value="@Model.User.Password">
+
+    </div>
+    <br />
+
+    <p> Is Admin?</p>
+    <select name="admin" class="form-select" aria-label="Default select example">
+        <option selected>Select a option</option>
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+
+    </select>
+
+
+    <br />
+    <p>Please select: Is Blocked?</p>
+    <input type="radio" id="iszero" name="blocked" value="false">
+    <label for="iszero">No</label>
+    <br>
+    <input type="radio" id="isone" name="blocked" value="true">
+    <label for="isone">Yes</label>
+    <br>
+
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
