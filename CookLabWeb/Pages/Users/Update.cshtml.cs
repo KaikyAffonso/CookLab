@@ -22,9 +22,9 @@ namespace CookLabWeb.Pages.Users
 
         }
         public IActionResult OnPost() {
+          
             User user = new User();
-
-
+            user.Id = Convert.ToInt32(Request.Form["id"]);
             user.Name = Convert.ToString(Request.Form["name"]);
             user.Username = Convert.ToString(Request.Form["username"]);
             user.Email = Convert.ToString(Request.Form["email"]);

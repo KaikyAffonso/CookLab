@@ -1,8 +1,14 @@
 using CookLab.Model;
 using CookLab.Service.Categories;
+using CookLab.Service.Difficulties;
+using CookLab.Service.Ingredients;
+using CookLab.Service.Measures;
 using CookLab.Service.Recipes;
+using CookLab.Service.RecipesIngredients;
+using CookLab.Service.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Runtime.CompilerServices;
 
 namespace CookLabWeb.Pages.Recipes
 {
@@ -10,55 +16,75 @@ namespace CookLabWeb.Pages.Recipes
     {
         private readonly IRecipeService _service;
         private readonly ICategoryService _category;
-        public RecipeModel(IRecipeService service, ICategoryService category)
+        private readonly IDifficultyService _difficulty;
+        private readonly IUserService _user;
+        private readonly IIngredientService _ingredient;
+        private readonly IRecipeIngredientService _recipeIngredient;
+        private readonly IMeasureService _measure;
+
+        public RecipeModel(IRecipeService service, ICategoryService category, IDifficultyService difficulty, IUserService user, IIngredientService ingredient, IRecipeIngredientService recipeIngredient, IMeasureService measure)
         {
 
             _service = service;
             _category = category;
+            _difficulty = difficulty;
+            _user = user;
+            _ingredient = ingredient;
+            _recipeIngredient = recipeIngredient;
+            _measure = measure;
         }
-        public List<Recipe> Recipes = new List<Recipe>();
- 
-        public List<Category> Category { get; set; }
+
+        public Recipe Recipe { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public List<RecipeIngredient> recipeIngredients = new List<RecipeIngredient>();
+
+        public List<Difficulty> Difficulties { get; set; }
+        public List<Ingredient> Ingredients { get; set; }
+        public List<Measure> Measures { get; set; }
+        public List<Category> Categories { get; set; }
+
 
         public void OnGet()
         {
-            Recipes = _service.RetrieveAll();
-            Category = _category.RetrieveAll();
+        //    Recipes = _service.RetrieveAll();
+            Categories = _category.RetrieveAll();
+            Difficulties = _difficulty.RetrieveAll();
+            Ingredients = _ingredient.RetrieveAll();
+            Measures = _measure.RetrieveAll();
         }
 
         public void OnPost()
         {
 
             Recipe recipe = new Recipe();
-            Category category = new Category();
-            recipe.Category = category;
 
-            User user = new User();
-            recipe.Author = user;
+            recipe.Category = new Category()
+            {
+                Id = Convert.ToInt32(Request.Form["category"])
+            };
 
-            Difficulty difficulty = new Difficulty();
-            recipe.Difficulty = difficulty;
+
+
+
+            recipe.Author = new User { Id = 1 };
+
+
+
+            recipe.Difficulty = new Difficulty()
+            {
+                Id = Convert.ToInt32(Request.Form["difficulty"])
+            };
 
             recipe.Title = Convert.ToString(Request.Form["title"]);
-            recipe.Difficulty.Name = Convert.ToString(Request.Form["Difficulty"]);
-           // recipe.Ingredient =(Request.Form["ingredients"]);
-            recipe.Author.Name = Convert.ToString(Request.Form["user"]);
-            recipe.Category.Name = Convert.ToString(Request.Form["category"]);
+            //recipe.Id = Convert.ToInt32(Request.Form["id"]);
             recipe.PrepMethod = Convert.ToString(Request.Form["method"]);
             recipe.PrepTime = Convert.ToInt32(Request.Form["time"]);
-            recipe.IsApproved = Convert.ToBoolean(Request.Form["name"]);
-
-            recipe.Author = new User();
-            recipe.Author.Id = 1; 
-
-
-            _service.Create(recipe);
+            recipe.IsApproved = Convert.ToBoolean(Request.Form["approved"]);
 
 
 
-            
-
-
+            Redirect("/Recipes/AddIngredient");
+            //Recipes = _service.RetrieveAll();
         }
     }
 }
