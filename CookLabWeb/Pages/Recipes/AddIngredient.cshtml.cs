@@ -6,8 +6,11 @@ namespace CookLabWeb.Pages.Recipes
 {
     public class AddIngredientModel : PageModel
     {
-        public void OnGet()
+        public void OnGet(int id)
         {
+          
+            
+            
             /*RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.Recipe.Id = recipe.Id;
 

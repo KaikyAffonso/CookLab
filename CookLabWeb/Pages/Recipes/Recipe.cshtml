@@ -2,8 +2,10 @@
 @using CookLab.Model;
 @model CookLabWeb.Pages.Recipes.RecipeModel
 @{
+    
+
 }
-<form method="post">
+<form  method="post">
     <div class="form-group">
 
         <label>ID:</label>
@@ -51,10 +53,12 @@
 
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    
+      <button  type="submit" class="btn btn-primary">Submit</button>
+    
 
 </form>
-
+@*<a asp-page="/Recipes/AddIngredient" asp-route-id="@Model.Recipe.Id">Adicionar Ingredientes a receita</a>*@
 
 <br />
 @*
