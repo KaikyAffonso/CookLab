@@ -1,5 +1,62 @@
 ﻿@page
+@using CookLab.Model;
 @model CookLabWeb.Pages.Recipes.AddIngredientModel
 @{
 }
-<h1>TESTE</h1>
+
+<form method="post">
+    <p>Select a Ingredient</p>
+    <select name="ingredient" class="form-select" aria-label="Default select example">
+        <option selected>Select a option</option>
+        @foreach (Ingredient ingredients in Model.Ingredients)
+        {
+
+            <option value="@ingredients.Id">@ingredients.Name</option>
+        }
+
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" name="quantity" class="form-control" placeholder="Enter Quantity">
+    <br />
+
+    <input hidden type="number" value="@Model.RecipeId.Id" name="recipeid"/>
+
+    <p>Select a Measure</p>
+    <select name="measure" class="form-select" aria-label="Default select example">
+        <option selected>Select a option</option>
+        @foreach (Measure measures in Model.Measure)
+        {
+
+            <option value="@measures.Id">@measures.Name</option>
+        }
+
+    </select>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Receita</th>
+            <th scope="col">Ingredient</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">measure</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var todos in Model.RecipeIngredient)
+        {
+            <tr>
+               
+                <td>@todos.Recipe.Title</td>
+                <td>@todos.Ingredient.Name</td>
+                <td>@todos.quantity</td>
+                <td>@todos.Measure.Name</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-page="/Recipes/AllRecipe" asp-route-id="@Model.RecipeId.Id"><button type="button" class="btn btn-primary btn-sm">Finish</button></a>

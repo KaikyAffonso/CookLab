@@ -1,0 +1,70 @@
+﻿@page
+@model CookLabWeb.Pages.Recipes.AllRecipeModel
+@{
+
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Receita</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Method</th>
+            <th scope="col">time</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr>
+
+            <td>@Model.Recipe.Title</td>
+            <td>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ingredient</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Measure</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ingredients in Model.Recipe.Ingredient)
+                        {
+                            <tr>
+
+                                <td>@ingredients.Ingredient.Name</td>
+                                <td>@ingredients.quantity</td>
+                                <td>@ingredients.Measure.Name</td>
+                              
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+              
+            </td>
+            <td>@Model.Recipe.PrepMethod</td>
+            <td>@Model.Recipe.PrepTime seg</td>
+
+            </tr>
+        
+    </tbody>
+</table>
+
+
+@*<p>@Model.Recipe.Id</p>
+<p>@Model.Recipe.Title</p>
+
+@foreach (var ingredients in Model.Recipe.Ingredient)
+{
+    
+    <p>@ingredients.Ingredient.Name</p>
+    <p>@ingredients.quantity</p>
+    <p>@ingredients.Measure.Name</p>
+
+}
+
+<p>@Model.Recipe.PrepMethod</p>
+<p>@Model.Recipe.Difficulty.Name</p>
+<p>@Model.Recipe.PrepTime</p>
+*@

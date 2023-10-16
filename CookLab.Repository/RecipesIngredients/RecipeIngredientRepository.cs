@@ -62,6 +62,9 @@ namespace CookLab.Repository.RecipesIngredients
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.Id = Convert.ToInt32(reader["id"]);
 
+            recipeIngredient.Recipe = new Recipe();
+            recipeIngredient.Recipe.Id = Convert.ToInt32(reader["id_recipe"]);
+
             Ingredient ingredient = new Ingredient();
             ingredient.Id = Convert.ToInt32(reader["id_ingredient"]);
             recipeIngredient.Ingredient = ingredient;

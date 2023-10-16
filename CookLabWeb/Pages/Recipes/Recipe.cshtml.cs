@@ -18,8 +18,8 @@ namespace CookLabWeb.Pages.Recipes
         private readonly ICategoryService _category;
         private readonly IDifficultyService _difficulty;
         private readonly IUserService _user;
-   
-      
+
+
         private readonly IMeasureService _measure;
 
         public RecipeModel(IRecipeService service, ICategoryService category, IDifficultyService difficulty, IUserService user, IMeasureService measure)
@@ -29,13 +29,13 @@ namespace CookLabWeb.Pages.Recipes
             _category = category;
             _difficulty = difficulty;
             _user = user;
-            
+
             _measure = measure;
         }
 
         public Recipe Recipe { get; set; }
-        public List<Recipe> Recipes { get; set; }       
-        public List<Difficulty> Difficulties { get; set; }       
+        public List<Recipe> Recipes { get; set; }
+        public List<Difficulty> Difficulties { get; set; }
         public List<Measure> Measures { get; set; }
         public List<Category> Categories { get; set; }
 
@@ -44,11 +44,11 @@ namespace CookLabWeb.Pages.Recipes
         {
             Recipes = _service.RetrieveAll();
             Categories = _category.RetrieveAll();
-            Difficulties = _difficulty.RetrieveAll();           
+            Difficulties = _difficulty.RetrieveAll();
             Measures = _measure.RetrieveAll();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
 
             Recipe recipe = new Recipe();
@@ -69,12 +69,13 @@ namespace CookLabWeb.Pages.Recipes
             recipe.IsApproved = Convert.ToBoolean(Request.Form["approved"]);
 
 
-            _service.Create(recipe);          
-            Recipes = _service.RetrieveAll();     
-            
-            OnGet();
-            
-           
+            recipe =  _service.Create(recipe);
+            Recipes = _service.RetrieveAll();
+
+            return RedirectToPage("/Recipes/AddIngredient", new { id = recipe.Id });
+
+
+
         }
     }
 }
