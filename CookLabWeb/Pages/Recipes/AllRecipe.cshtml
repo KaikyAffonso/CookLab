@@ -3,68 +3,44 @@
 @{
 
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Receita</th>
-            <th scope="col">Ingredients</th>
-            <th scope="col">Method</th>
-            <th scope="col">time</th>
-        </tr>
-    </thead>
-    <tbody>
-        
-            <tr>
 
-            <td>@Model.Recipe.Title</td>
-            <td>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Ingredient</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Measure</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var ingredients in Model.Recipe.Ingredient)
-                        {
-                            <tr>
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75">
+        <h1>@Model.Recipe.Title</h1>
+        </br>
+        <h4> <p>@Model.Recipe.PrepTime Minutes</p></h4>
+        </br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ingredient</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Measure</th>
 
-                                <td>@ingredients.Ingredient.Name</td>
-                                <td>@ingredients.quantity</td>
-                                <td>@ingredients.Measure.Name</td>
-                              
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ingredients in Model.Recipe.Ingredient)
+                {
+                    <tr>
 
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-              
-            </td>
-            <td>@Model.Recipe.PrepMethod</td>
-            <td>@Model.Recipe.PrepTime seg</td>
-
-            </tr>
-        
-    </tbody>
-</table>
+                        <td>@ingredients.Ingredient.Name</td>
+                        <td>@ingredients.quantity</td>
+                        <td>@ingredients.Measure.Name</td>
 
 
-@*<p>@Model.Recipe.Id</p>
-<p>@Model.Recipe.Title</p>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>@Model.Recipe.PrepMethod</p>
 
-@foreach (var ingredients in Model.Recipe.Ingredient)
-{
-    
-    <p>@ingredients.Ingredient.Name</p>
-    <p>@ingredients.quantity</p>
-    <p>@ingredients.Measure.Name</p>
+        <a asp-page="/Recipes/UpdateRecipe" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>
 
-}
 
-<p>@Model.Recipe.PrepMethod</p>
-<p>@Model.Recipe.Difficulty.Name</p>
-<p>@Model.Recipe.PrepTime</p>
-*@
+    </div>
+</div>
+
+
+
+

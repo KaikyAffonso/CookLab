@@ -55,8 +55,16 @@ namespace CookLab.Repository.Recipes
 
         public Recipe Update(Recipe recipe)
         {
-            string sql = $"UPDATE {tableName} SET title= '{recipe.Title}', id_category= {recipe.Category.Id}, prep_time={recipe.PrepTime}, prep_method='{recipe.PrepMethod}', id_difficulty= {recipe.Difficulty.Id} WHERE id= {recipe.Id};";
-            SQL.ExecuteNonQuery (sql);
+            int isApproved = recipe.IsApproved ? 1 : 0;
+            string sql = $"UPDATE {tableName} SET" +
+                $" title = '{recipe.Title}'," +
+                $" id_category = {recipe.Category.Id}," +
+                $" prep_time = {recipe.PrepTime}," +
+                $" prep_method = '{recipe.PrepMethod}'," +
+                $" id_difficulty = {recipe.Difficulty.Id}," +
+                $" is_approved = {isApproved}" +
+                $" WHERE id = {recipe.Id}";
+            SQL.ExecuteNonQuery(sql);
             return Retrieve(recipe.Id);
         }
 

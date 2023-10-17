@@ -1,9 +1,7 @@
 ﻿@page
 @using CookLab.Model;
-@model CookLabWeb.Pages.Recipes.RecipeModel
+@model CookLabWeb.Pages.Recipes.UpdateRecipeModel
 @{
-
-
 }
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75">
@@ -11,18 +9,18 @@
             <div class="form-group">
                 <div width="35%">
                     <label for="title">Title</label>
-                    <input name="title" class="form-control" placeholder="Enter Title">
+                    <input name="title" class="form-control" value="@Model.Recipe.Title">
                     <br>
                     <label for="method">Descrição</label>
-                    <input name="method" class="form-control" placeholder="Describe">
+                    <input name="method" class="form-control" value="@Model.Recipe.PrepMethod">
                     <br>
                     <label for="time">Tempo</label>
-                    <input type="number" name="time" class="form-control" placeholder="Enter Time">
+                    <input type="number" name="time" class="form-control" value="@Model.Recipe.PrepTime">
                     <br>
-
+                    <input hidden type="number" name="id" class="form-control" value="@Model.Recipe.Id">
                     <p>Select a Category</p>
                     <select name="category" class="form-select" aria-label="Default select example">
-                        <option selected>Select an option</option>
+                        <option selected value="@Model.Recipe.Category.Id">@Model.Recipe.Category.Name</option>
                         @foreach (Category category in Model.Categories)
                         {
                             <option value="@category.Id">@category.Name</option>
@@ -31,7 +29,7 @@
 
                     <p>Select a Difficulty</p>
                     <select name="difficulty" class="form-select" aria-label="Default select example">
-                        <option selected>Select an option</option>
+                        <option selected value="@Model.Recipe.Difficulty.Id">@Model.Recipe.Difficulty.Name</option>
                         @foreach (Difficulty difficulties in Model.Difficulties)
                         {
                             <option value="@difficulties.Id">@difficulties.Name</option>
@@ -53,32 +51,3 @@
         </form>
     </div>
 </div>
-
-</div>
-@*<a asp-page="/Recipes/AddIngredient" asp-route-id="@Model.Recipe.Id">Adicionar Ingredientes a receita</a>*@
-
-<br />
-@*
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var category in Model.categories)
-        {
-            <tr>
-                <th scope="row">@category.Id</th>
-                <td>@category.Name</td>
-                <td>
-                    <a asp-page="/Categories/Update" asp-route-id="@category.Id"><button type="button" class="btn btn-primary btn-sm">Update</button></a> /
-                    <a asp-page="/Categories/Delete" asp-route-id="@category.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a> /
-                    <a asp-page="/Categories/Retrieve" asp-route-id="@category.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@

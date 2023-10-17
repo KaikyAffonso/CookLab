@@ -54,7 +54,7 @@
                 <td>@todos.Ingredient.Name</td>
                 <td>@todos.quantity</td>
                 <td>@todos.Measure.Name</td>
-                
+                <td> <a asp-page="/Recipes/DeleteIngredient" asp-route-id="@todos.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a></td>
             </tr>
         }
     </tbody>

@@ -22,7 +22,7 @@ namespace CookLab.Repository.RecipesIngredients
 
         public void Delete(int id)
         {
-            string sql = $"DELETE * FROM recipe_ingredients WHERE id = {id};";
+            string sql = $"DELETE FROM recipe_ingredients WHERE id = {id};";
             SQL.ExecuteNonQuery(sql);
         }
 
