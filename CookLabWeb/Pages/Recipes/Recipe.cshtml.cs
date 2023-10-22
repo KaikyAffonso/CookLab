@@ -66,7 +66,7 @@ namespace CookLabWeb.Pages.Recipes
             //recipe.Id = Convert.ToInt32(Request.Form["id"]);
             recipe.PrepMethod = Convert.ToString(Request.Form["method"]);
             recipe.PrepTime = Convert.ToInt32(Request.Form["time"]);
-            recipe.IsApproved = Convert.ToBoolean(Request.Form["approved"]);
+            recipe.IsApproved = false;
 
 
             recipe =  _service.Create(recipe);
