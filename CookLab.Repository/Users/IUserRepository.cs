@@ -14,5 +14,6 @@ namespace CookLab.Repository.Users
         List<User> RetrieveAll();
         User Update(User user);
         void Delete(int id);
+        User Login(string username, string password);
     }
 }

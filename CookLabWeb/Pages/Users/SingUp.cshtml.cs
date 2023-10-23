@@ -24,8 +24,8 @@ namespace CookLabWeb.Pages.Users
             user.Username = Convert.ToString(Request.Form["username"]);
             user.Email = Convert.ToString(Request.Form["email"]);
             user.Password = Convert.ToString(Request.Form["password"]);
-            user.IsAdmin = Convert.ToBoolean(Request.Form["admin"]);
-            user.IsBlocked = Convert.ToBoolean(Request.Form["blocked"]);
+            user.IsAdmin = false;
+            user.IsBlocked = true;
 
 
 

@@ -15,8 +15,8 @@ namespace CookLab.Repository.Recipes
         {
             int isApproved = recipe.IsApproved ? 1 : 0;
 
-            string sql = $"INSERT INTO {tableName} (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved) " +
-                $"VALUES ('{recipe.Title}', {recipe.Author.Id}, {recipe.Category.Id}, {recipe.PrepTime}, '{recipe.PrepMethod}', {recipe.Difficulty.Id}, {isApproved});";
+            string sql = $"INSERT INTO {tableName} (title, id_user, id_category, prep_time, prep_method, id_difficulty, is_approved, img) " +
+                $"VALUES ('{recipe.Title}', {recipe.Author.Id}, {recipe.Category.Id}, {recipe.PrepTime}, '{recipe.PrepMethod}', {recipe.Difficulty.Id}, {isApproved}, '{recipe.Image}');";
             SQL.ExecuteNonQuery(sql);
             int maxId = SQL.GetMax("id", tableName);
             return Retrieve(maxId);
@@ -62,7 +62,8 @@ namespace CookLab.Repository.Recipes
                 $" prep_time = {recipe.PrepTime}," +
                 $" prep_method = '{recipe.PrepMethod}'," +
                 $" id_difficulty = {recipe.Difficulty.Id}," +
-                $" is_approved = {isApproved}" +
+                $" is_approved = {isApproved}," +
+                $" img= '{recipe.Image}'"+
                 $" WHERE id = {recipe.Id}";
             SQL.ExecuteNonQuery(sql);
             return Retrieve(recipe.Id);
@@ -83,6 +84,10 @@ namespace CookLab.Repository.Recipes
             recipe.PrepMethod= Convert.ToString(reader["prep_method"]);
             recipe.Difficulty.Id= Convert.ToInt32(reader["id_difficulty"]);
             recipe.IsApproved= Convert.ToBoolean(reader["is_approved"]);
+            if (reader["img"] != null)
+            {
+               recipe.Image = Convert.ToString(reader["img"]);
+            }
             return recipe;
         }
     }

@@ -12,8 +12,10 @@ using System.Runtime.CompilerServices;
 
 namespace CookLabWeb.Pages.Recipes
 {
+    
     public class RecipeModel : PageModel
     {
+
         private readonly IRecipeService _service;
         private readonly ICategoryService _category;
         private readonly IDifficultyService _difficulty;
@@ -39,6 +41,8 @@ namespace CookLabWeb.Pages.Recipes
         public List<Measure> Measures { get; set; }
         public List<Category> Categories { get; set; }
 
+        [BindProperty]
+        public IFormFile? Image { get; set; }
 
         public void OnGet()
         {
@@ -55,7 +59,7 @@ namespace CookLabWeb.Pages.Recipes
             recipe.Category = new Category();
             recipe.Category.Id = Convert.ToInt32(Request.Form["category"]);
 
-            recipe.Author = new User { Id = 1 };
+           
 
             recipe.Difficulty = new Difficulty()
             {
@@ -67,10 +71,21 @@ namespace CookLabWeb.Pages.Recipes
             recipe.PrepMethod = Convert.ToString(Request.Form["method"]);
             recipe.PrepTime = Convert.ToInt32(Request.Form["time"]);
             recipe.IsApproved = false;
+       
+            recipe.Image = Image.FileName;
 
+            var file = Path.Combine("img/", Image.FileName);
+            using (var fileStream = new FileStream(file, FileMode.Create))
+            {
+                Image.CopyTo(fileStream);
+            }
 
             recipe =  _service.Create(recipe);
             Recipes = _service.RetrieveAll();
+
+
+
+
 
             return RedirectToPage("/Recipes/AddIngredient", new { id = recipe.Id });
 

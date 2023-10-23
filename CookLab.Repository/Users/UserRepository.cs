@@ -67,7 +67,16 @@ namespace CookLab.Repository.Users
             SQL.ExecuteNonQuery(sql);
             return Retrieve(user.Id);
         }
-
+        public User Login(string username, string password)
+        {
+            string sql = $"SELECT * FROM {tableName} WHERE username = '{username}' AND password = CONVERT(VARCHAR(32), HashBytes('MD5', '{password}'), 2);";
+            SqlDataReader reader = SQL.Execute(sql);
+            if (reader.Read())
+            {
+                return Parse(reader);
+            }
+            throw new Exception("User not found.");
+        }
         private User Parse(SqlDataReader reader)
         {
             User user = new User();

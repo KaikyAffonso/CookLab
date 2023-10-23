@@ -2,6 +2,7 @@ using CookLab.Model;
 using CookLab.Service.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Users
 {
@@ -12,24 +13,35 @@ namespace CookLabWeb.Pages.Users
         {
             _service=service;
         }
+        public User User { get; set; }  
         public void OnGet()
         {
         }
 
         public IActionResult OnPost()
         {
-            User user = new User();
-
-
-            user.Email = Convert.ToString(Request.Form["email"]);
-            user.Password = Convert.ToString(Request.Form["password"]);
-
-
-
-
-            //_service.Retrieve(user.Id);
+            SetUser();
             return RedirectToPage("/Index");
 
+        }
+        private void SetUser()
+        {
+            string username = Convert.ToString(Request.Form["username"]);
+            string password = Convert.ToString(Request.Form["password"]);
+            User u = _service.Login(username, password);
+
+            string jsonString = JsonSerializer.Serialize(u);
+
+            HttpContext.Session.SetString("user", jsonString);
+        }
+
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

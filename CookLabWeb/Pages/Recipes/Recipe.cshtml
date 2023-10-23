@@ -7,7 +7,7 @@
 }
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75">
-        <form method="post" class="w-100 p-3">
+        <form method="post" enctype="multipart/form-data" class="w-100 p-3">
             <div class="form-group">
                 <div width="35%">
                     <label for="title">Title</label>
@@ -37,6 +37,8 @@
                             <option value="@difficulties.Id">@difficulties.Name</option>
                         }
                     </select>
+
+                    <input type="file" name="image" asp-for="@Model.Image"/>
 
                  @*   <br>
                     <p>Please select: Is Approved?</p>

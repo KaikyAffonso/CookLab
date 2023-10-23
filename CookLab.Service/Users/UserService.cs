@@ -36,7 +36,10 @@ namespace CookLab.Service.Users
         {
             return repository.RetrieveAll();
         }
-
+        public User Login(string username, string password)
+        {
+            return repository.Login(username, password);
+        }
         public User Update(User user)
         {
             return repository.Update(user);

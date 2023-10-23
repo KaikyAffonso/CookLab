@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="img\feijao.png" />
+    <Content Include="img\noimg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CookLab.Service\CookLab.Service.csproj" />
   </ItemGroup>
 
