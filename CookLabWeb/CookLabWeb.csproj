@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="img\feijao.png" />
-    <Content Include="img\noimg.jpg" />
+    <None Include="wwwroot\img\Captura de Ecrã %2818%29.png" />
+    <None Include="wwwroot\img\Captura de Ecrã %2895%29.png" />
+    <None Include="wwwroot\img\feijao.png" />
+    <None Include="wwwroot\img\licensed-image.jpeg" />
+    <None Include="wwwroot\img\noimg.jpg" />
   </ItemGroup>
 
   <ItemGroup>

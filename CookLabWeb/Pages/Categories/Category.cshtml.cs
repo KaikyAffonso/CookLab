@@ -2,6 +2,7 @@ using CookLab.Model;
 using CookLab.Service.Categories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Categories
 {
@@ -14,8 +15,10 @@ namespace CookLabWeb.Pages.Categories
         }
 
         public List<Category> categories { get; set; }
+        public User User { get; set; }
         public void OnGet()
         {
+            GetUser();
             categories = _service.RetrieveAll();
         }
 
@@ -25,6 +28,14 @@ namespace CookLabWeb.Pages.Categories
             category.Name = Convert.ToString(Request.Form["name"]);
             _service.Create(category);
             categories = _service.RetrieveAll();
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

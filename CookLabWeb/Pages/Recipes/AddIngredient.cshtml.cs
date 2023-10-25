@@ -5,6 +5,7 @@ using CookLab.Service.Recipes;
 using CookLab.Service.RecipesIngredients;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Recipes
 {
@@ -26,8 +27,10 @@ namespace CookLabWeb.Pages.Recipes
         public List<Measure> Measure { get; set; }
         public Recipe RecipeId { get; set; }
         public List<Ingredient> Ingredients { get; set; }
+        public User User { get; set; }
         public void OnGet(int id)
         {
+            GetUser();
             RecipeIngredient = _service.RetrieveAllByRecipeId(id);
             RecipeId = _recipe.Retrieve(id);
             Measure = _measure.RetrieveAll();
@@ -54,6 +57,14 @@ namespace CookLabWeb.Pages.Recipes
             recipeIngredient = _service.Create(recipeIngredient);
             OnGet(recipeIngredient.Recipe.Id);
            
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

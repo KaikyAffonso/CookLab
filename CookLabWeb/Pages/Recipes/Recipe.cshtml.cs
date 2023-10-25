@@ -9,10 +9,11 @@ using CookLab.Service.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Recipes
 {
-    
+
     public class RecipeModel : PageModel
     {
 
@@ -40,12 +41,14 @@ namespace CookLabWeb.Pages.Recipes
         public List<Difficulty> Difficulties { get; set; }
         public List<Measure> Measures { get; set; }
         public List<Category> Categories { get; set; }
+        public User User { get; set; }
 
         [BindProperty]
         public IFormFile? Image { get; set; }
 
         public void OnGet()
         {
+            GetUser();
             Recipes = _service.RetrieveAll();
             Categories = _category.RetrieveAll();
             Difficulties = _difficulty.RetrieveAll();
@@ -59,7 +62,7 @@ namespace CookLabWeb.Pages.Recipes
             recipe.Category = new Category();
             recipe.Category.Id = Convert.ToInt32(Request.Form["category"]);
 
-           
+
 
             recipe.Difficulty = new Difficulty()
             {
@@ -71,10 +74,13 @@ namespace CookLabWeb.Pages.Recipes
             recipe.PrepMethod = Convert.ToString(Request.Form["method"]);
             recipe.PrepTime = Convert.ToInt32(Request.Form["time"]);
             recipe.IsApproved = false;
-       
+
             recipe.Image = Image.FileName;
 
-            var file = Path.Combine("img/", Image.FileName);
+            recipe.Author = new User();
+            recipe.Author.Id = Convert.ToInt32(Request.Form["userid"]);
+
+            var file = Path.Combine("wwwroot/img/", Image.FileName);
             using (var fileStream = new FileStream(file, FileMode.Create))
             {
                 Image.CopyTo(fileStream);
@@ -91,6 +97,14 @@ namespace CookLabWeb.Pages.Recipes
 
 
 
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

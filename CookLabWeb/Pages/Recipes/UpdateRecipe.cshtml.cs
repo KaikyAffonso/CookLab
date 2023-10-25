@@ -4,6 +4,7 @@ using CookLab.Service.Difficulties;
 using CookLab.Service.Recipes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Recipes
 {
@@ -22,8 +23,10 @@ namespace CookLabWeb.Pages.Recipes
         public Recipe Recipe { get; set; } 
         public List<Difficulty> Difficulties { get; set; }
         public List<Category> Categories { get; set; }
+        public User User { get; set; }
         public void OnGet(int id)
         {
+            GetUser();
             Recipe = _service.Retrieve(id);
             Categories = _category.RetrieveAll();
             Difficulties = _difficulty.RetrieveAll();
@@ -34,7 +37,8 @@ namespace CookLabWeb.Pages.Recipes
             recipe.Category = new Category();
             recipe.Category.Id = Convert.ToInt32(Request.Form["category"]);
 
-            recipe.Author = new User { Id = 1 };
+            recipe.Author = new User();
+            recipe.Author.Id = Convert.ToInt32(Request.Form["userid"]); ;
 
             recipe.Difficulty = new Difficulty()
             {
@@ -53,6 +57,14 @@ namespace CookLabWeb.Pages.Recipes
 
             return RedirectToPage("/Recipes/AddIngredient", new { id = recipe.Id });
 
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
     }
 }

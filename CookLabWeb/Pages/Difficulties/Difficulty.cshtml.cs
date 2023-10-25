@@ -2,6 +2,7 @@ using CookLab.Model;
 using CookLab.Service.Difficulties;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Text.Json;
 
 namespace CookLabWeb.Pages.Difficulties
 {
@@ -15,8 +16,10 @@ namespace CookLabWeb.Pages.Difficulties
         }
 
         public List<Difficulty> _difficulties = new List<Difficulty>();
+        public User User { get; set; }
         public void OnGet()
         {
+            GetUser();
             _difficulties = _service.RetrieveAll();
 
         }
@@ -28,6 +31,14 @@ namespace CookLabWeb.Pages.Difficulties
             _difficulties = _service.RetrieveAll();
 
 
+        }
+        private void GetUser()
+        {
+            string user = HttpContext.Session.GetString("user");
+            if (user != null)
+            {
+                User = JsonSerializer.Deserialize<User>(user);
+            }
         }
 
     }

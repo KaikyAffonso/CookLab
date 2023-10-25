@@ -10,6 +10,7 @@
                 <div width="35%">
                     <label for="title">Title</label>
                     <input name="title" class="form-control" value="@Model.Recipe.Title">
+                    <input hidden name="userid" class="form-control" value="@Model.User.Id">
                     <br>
                     <label for="method">Descrição</label>
                     <input name="method" class="form-control" value="@Model.Recipe.PrepMethod">
