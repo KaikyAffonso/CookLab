@@ -39,7 +39,11 @@
                         }
                     </select>
 
-                    <input type="file" name="image" asp-for="@Model.Image"/>
+                    
+                    <div class="input-group">
+                        <input type="file" name="image" asp-for="@Model.Image" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                      
+                    </div>
 
                  @*   <br>
                     <p>Please select: Is Approved?</p>

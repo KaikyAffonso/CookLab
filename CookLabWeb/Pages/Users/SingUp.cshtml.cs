@@ -32,7 +32,7 @@ namespace CookLabWeb.Pages.Users
 
 
             _service.Create(user);
-           return RedirectToPage("/Index");
+           return RedirectToPage("/Users/LogIn");
         }
         private void GetUser()
         {

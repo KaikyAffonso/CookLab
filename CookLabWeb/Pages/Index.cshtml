@@ -9,28 +9,13 @@
 }
 <div class="container text-center">
     <div class="row">
-        <div class="col-sm">    </br>    </br>    </br> </div>
-        <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75 ">
+
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75" style="margin-left:5%;">
 
 
 
-            <div class="col-sm-12">
-                @if (Model.User is null)
-                {
-                    <h1 class="display-4">Welcome Guest</h1>
-                }
-                else
-                {
-                    <h1 class="display-4">Welcome @Model.User.Name</h1>
-                    @if (Model.User.IsAdmin)
-                    {
-                        <div>Admin</div>
-                    }
-                    else
-                    {
-                        <div>User</div>
-                    }
-                }
+            <div class="col-sm-13">
+               
 
 
 
@@ -78,49 +63,81 @@
 
 
 
-                <div style="padding-left: 25%; margin-top: 5%; " >
-               
-                
-                @foreach (var recipe in Model.Recipes)
-                {
-                    if (recipe.IsApproved == true)
+                <div style="padding-left: 25%; margin-top: 5%; ">
+
+
+                    @foreach (var recipe in Model.Recipes)
                     {
+                        if (recipe.IsApproved == true)
+                        {
 
 
-                        <div class="card" style="width: 30rem; margin-bottom:2%;">
-                            @if (recipe.Image.Equals(""))
-                            {
-                                <img src="/img/noimg.jpg" class="card-img-top" alt="...">
-                            }
-                            else
-                            {
-                                <img src="/img/@recipe.Image" class="card-img-top" alt="...">
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">@recipe.Title</h5>
-                                <p class="card-text">@recipe.PrepTime Minutes</p>
+                            <div class="card" style="width: 30rem; margin-bottom:2%;">
+                                @if (recipe.Image.Equals(""))
+                                {
+                                    <img src="/img/noimg.jpg" class="card-img-top" alt="...">
+                                }
+                                else
+                                {
+                                    <img src="/img/@recipe.Image" class="card-img-top" alt="...">
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">@recipe.Title</h5>
+                                    <p class="card-text">@recipe.PrepTime Minutes</p>
 
-                                <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipe.Id"> View </a>
+                                    <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipe.Id"> View </a>
 
+
+                                </div>
 
                             </div>
 
-                        </div>
 
+                        }
+                    }
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+        <div class="col-sm" style="
+                                             position: fixed;
+                                              right: 0;
+                                             top: auto;
+                                               width: 23em;
+                                             margin-top: auto; ">
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75 ">
+
+
+
+
+                @if (Model.User is null)
+                {
+                    <p>Welcome Guest</p>
+                }
+                else
+                {
+                    <p>Welcome Chef @Model.User.Name !</p>
+                    @if (Model.User.IsAdmin)
+                    {
+                        <div>Admin</div>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" asp-page="/Recipes/Recipe" asp-route-id=""><i class="fa-regular fa-pen-to-square"></i> Create a Recipe! </a>
 
                     }
                 }
             </div>
-            </div>
-
-
-
         </div>
-        <div class="col-sm">
-            
-        </div>
-        </br>
+
     </div>
 </div>
-<h1>teste</h1>
+
 

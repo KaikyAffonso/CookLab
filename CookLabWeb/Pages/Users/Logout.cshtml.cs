@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CookLabWeb.Pages.Users
 {
-    public class LogoutcshtmlModel : PageModel
+    public class LogoutModel : PageModel
     {
         public IActionResult OnGet()
         {
-            HttpContext.Session.Clear();
-            return Redirect("/index");
+                HttpContext.Session.Clear();
+                return Redirect("/Index");
+            
         }
     }
 }
