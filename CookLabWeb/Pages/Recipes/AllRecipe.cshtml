@@ -10,6 +10,16 @@
         </br>
         <h4> <p>@Model.Recipe.PrepTime Minutes</p></h4>
         </br>
+        <div  style="width: 18rem;">
+        @if(Model.Recipe.Image.Equals(""))
+        {
+            <img src="/img/noimg.jpg" class="card-img-top" alt="...">
+        }
+        else
+        {
+            <img src="/img/@Model.Recipe.Image" class="card-img-top" alt="...">
+        }
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -35,7 +45,25 @@
         </table>
         <p>@Model.Recipe.PrepMethod</p>
 
-        <a asp-page="/Recipes/UpdateRecipe" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+        @if (Model.User is null)
+        {
+            <a asp-page="/Index"><i class="fa-solid fa-arrow-left"></i>Return</a>
+        }
+        else
+        {
+
+            @if (Model.User.IsAdmin)
+            {
+                <a asp-page="/Recipes/UpdateRecipe" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+            }
+            else
+            {
+                <a asp-page="/Index"><i class="fa-solid fa-arrow-left"></i>Return</a>
+
+            }
+        }
+
+
 
 
     </div>
