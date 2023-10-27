@@ -2,7 +2,7 @@
 @model CookLabWeb.Pages.Users.UserModel
 @{
 }
-<form method="post">
+@*<form method="post">
     <div class="form-group">
         <label>Name</label>
         <input name="name" class="form-control" placeholder="Enter Name">
@@ -39,7 +39,7 @@
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</form>*@
 <br />
 
 <table class="table">
@@ -54,7 +54,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var users in Model.User)
+        @foreach (var users in Model.Users)
         {
             <tr>
                 <th scope="row">@users.Id</th>
