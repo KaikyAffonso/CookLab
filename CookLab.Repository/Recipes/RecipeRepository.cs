@@ -62,8 +62,8 @@ namespace CookLab.Repository.Recipes
                 $" prep_time = {recipe.PrepTime}," +
                 $" prep_method = '{recipe.PrepMethod}'," +
                 $" id_difficulty = {recipe.Difficulty.Id}," +
-                $" is_approved = {isApproved}," +
-                $" img= '{recipe.Image}'"+
+                $" is_approved = {isApproved}" +
+             
                 $" WHERE id = {recipe.Id}";
             SQL.ExecuteNonQuery(sql);
             return Retrieve(recipe.Id);
