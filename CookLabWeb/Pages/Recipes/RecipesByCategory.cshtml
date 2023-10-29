@@ -1,0 +1,115 @@
+﻿@page
+@model CookLabWeb.Pages.Recipes.RecipesByCategoryModel
+@{
+}
+@foreach (var item in Model.Categories)
+{
+
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75" style="margin-left:5%;">
+
+        <h2> @item.Name</h2>
+        <div style=" margin-top: 5%; ">
+
+
+            @foreach (var recipe in Model.Recipes)
+            {
+                if (recipe.Category.Name == item.Name)
+                {
+                    if (recipe.IsApproved == true)
+                    {
+
+                      
+                            <div class="card" style="height: 20em; width:15em; margin-bottom:2%; display:inline-block; margin-left:2%;">
+                                @if (recipe.Image.Equals(""))
+                                {
+                                    <img height="159" width="155" src="/img/noimg.jpg" class="card-img-top" alt="...">
+                                }
+                                else
+                                {
+                                    <img height="159" width="155" src="/img/@recipe.Image" class="card-img-top" alt="...">
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">@recipe.Title</h5>
+                                    <p class="card-text">@recipe.PrepTime Minutes</p>
+
+                                    <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipe.Id"> View </a>
+
+
+                                </div>
+
+                            </div>
+
+                        
+                    }
+                }
+            }
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+}
+@*<div class="container text-center">
+    <div class="row">
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75" style="margin-left:5%;">
+            <div class="col-sm-13">
+                <div style=" margin-top: 5%; ">
+                    <div class="d-inline-flex flex-wrap align-content-around bg-light" style="background-color:white;">
+
+                        @foreach (var recipe in Model.Recipes)
+                        {
+                            if (recipe.IsApproved == true)
+                            {
+
+                                <div class="p-2 border" style="margin-left: 4%;">
+                                    <div class="card" style="height: 20em; width:15em; margin-bottom:2%;">
+                                        @if (recipe.Image.Equals(""))
+                                        {
+                                            <img height="159" width="155" src="/img/noimg.jpg" class="card-img-top" alt="...">
+                                        }
+                                        else
+                                        {
+                                            <img height="159" width="155" src="/img/@recipe.Image" class="card-img-top" alt="...">
+                                        }
+                                        <div class="card-body">
+                                            <h5 class="card-title">@recipe.Title</h5>
+                                            <p class="card-text">@recipe.PrepTime Minutes</p>
+
+                                            <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipe.Id"> View </a>
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+                        }
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+*@

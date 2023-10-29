@@ -3,69 +3,86 @@
 @{
 
 }
-
+@*@if(TempData["alert"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@TempData["alert"]</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}*@
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75">
         <div style=" align-items:center;">
+            @if (TempData["alert"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@TempData["alert"]!</strong> Wait for approval of your post by one of our administrators.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <h1>@Model.Recipe.Title</h1>
-        </br>
-        <h4> <p>@Model.Recipe.PrepTime Minutes</p></h4>
-        </br>
-        <div  style="width: 18rem; margin-left:35%;">
-        @if(Model.Recipe.Image.Equals(""))
-        {
-            <img src="/img/noimg.jpg" class="card-img-top" alt="...">
-        }
-        else
-        {
-            <img src="/img/@Model.Recipe.Image" class="card-img-top" alt="...">
-        }
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Ingredient</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Measure</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var ingredients in Model.Recipe.Ingredient)
+            </br>
+            <h4> <p>@Model.Recipe.PrepTime Minutes</p></h4>
+            </br>
+            <div style="width: 18rem; margin-left:35%;">
+                @if (Model.Recipe.Image.Equals(""))
                 {
+                    <img src="/img/noimg.jpg" class="card-img-top" alt="...">
+                }
+                else
+                {
+                    <img src="/img/@Model.Recipe.Image" class="card-img-top" alt="...">
+                }
+            </div>
+            <table class="table">
+                <thead>
                     <tr>
-
-                        <td>@ingredients.Ingredient.Name</td>
-                        <td>@ingredients.quantity</td>
-                        <td>@ingredients.Measure.Name</td>
-
+                        <th scope="col">Ingredient</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Measure</th>
 
                     </tr>
-                }
-            </tbody>
-        </table>
-        <p>@Model.Recipe.PrepMethod</p>
+                </thead>
+                <tbody>
+                    @foreach (var ingredients in Model.Recipe.Ingredient)
+                    {
+                        <tr>
 
-        @if (Model.User is null)
-        {
-            <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Return</a>
-        }
-        else
-        {
+                            <td>@ingredients.Ingredient.Name</td>
+                            <td>@ingredients.quantity</td>
+                            <td>@ingredients.Measure.Name</td>
 
-            @if (Model.User.IsAdmin)
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p>@Model.Recipe.PrepMethod</p>
+
+            @if (Model.User is null)
             {
-                <a asp-page="/Recipes/UpdateRecipe" asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>
-                <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>  Return</a>
+                <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Return</a>
             }
             else
             {
-                <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>Return</a>
 
+                @if (Model.User.IsAdmin)
+                {
+                    <a asp-page="/Recipes/UpdateRecipe" class="btn btn-primary"  asp-route-id="@Model.Recipe.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                    <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>   </a>
+
+                    <a class="btn btn-primary" asp-page="/Recipes/Approve" asp-route-id="@Model.Recipe.Id"> Approve </a>
+                    <a class="btn btn-primary" asp-page="/Recipes/Delete" asp-route-id="@Model.Recipe.Id"> <i class="fa-solid fa-trash"></i> </a>
+
+                }
+                else
+                {
+                    <a asp-page="/Index" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>   </a>
+
+                }
             }
-        }
 
-       </div>
+        </div>
 
 
     </div>

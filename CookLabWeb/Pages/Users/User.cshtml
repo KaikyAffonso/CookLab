@@ -2,44 +2,7 @@
 @model CookLabWeb.Pages.Users.UserModel
 @{
 }
-@*<form method="post">
-    <div class="form-group">
-        <label>Name</label>
-        <input name="name" class="form-control" placeholder="Enter Name">
-        <br />
-        <label>Username</label>
-        <input name="username" class="form-control" placeholder="Enter Username">
-        <br />
-        <label>Email</label>
-        <input name="email" class="form-control" placeholder="Enter Email">
-        <br />
-        <label>Password</label>
-        <input type="password" name="password" class="form-control" placeholder="Enter Name">
-        <br />
 
-        <p> Is Admin?</p>
-        <select name="admin" class="form-select" aria-label="Default select example">
-            <option selected>Select a option</option>
-            <option value="false">No</option>
-            <option value="true">Yes</option>
-
-        </select>
-
-
-        <br />
-        <p>Please select: Is Blocked?</p>
-        <input type="radio" id="iszero" name="blocked" value="false">
-        <label for="iszero">No</label>
-        <br>
-        <input type="radio" id="isone" name="blocked" value="true">
-        <label for="isone">Yes</label>
-        <br>
-
-
-    </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>*@
 <br />
 
 <table class="table">
@@ -65,9 +28,9 @@
                 <td>@users.IsBlocked</td>
 
                 <td>
-                    <a asp-page="/Users/Update" asp-route-id="@users.Id"><i class="fa-regular fa-pen-to-square"></i></a> /
-                    <a asp-page="/Users/Delete" asp-route-id="@users.Id"><img width="25" height="25" src="https://img.icons8.com/stickers/100/delete-trash.png" alt="delete-trash" /></a> /
-                    <a asp-page="/Users/Retrieve" asp-route-id="@users.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
+                    <a asp-page="/Users/Update" asp-route-id="@users.Id"><i class="fa-regular fa-pen-to-square"></i> </a> /
+                    <a asp-page="/Users/Delete" asp-route-id="@users.Id"><i class="fa-solid fa-trash"></i></a> /
+                    <a asp-page="/Users/Retrieve" asp-route-id="@users.Id"><i class="fa-solid fa-eye"></i></a>
                 </td>
             </tr>
         }

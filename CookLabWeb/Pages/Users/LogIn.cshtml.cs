@@ -20,7 +20,7 @@ namespace CookLabWeb.Pages.Users
 
         public IActionResult OnPost()
         {
-            SetUser();
+            SetUser();          
             return RedirectToPage("/Index");
 
         }

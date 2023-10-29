@@ -19,7 +19,7 @@ namespace CookLabWeb.Pages.Recipes
         {
             GetUser();
             _service.Delete(id);
-            return Redirect("/Recipes/ListRecipes");
+            return Redirect("/Index");
         }
         private void GetUser()
         {

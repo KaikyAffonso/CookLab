@@ -7,30 +7,25 @@ using System.Text.Json;
 
 namespace CookLabWeb.Pages.Recipes
 {
-    public class AllRecipeModel : PageModel
+    public class RecipesByCategoryModel : PageModel
     {
         private readonly IRecipeService _service;
-        public User User { get; set; }
-        public AllRecipeModel(IRecipeService service )
+        private readonly ICategoryService _category;
+        public RecipesByCategoryModel(IRecipeService service, ICategoryService category)
         {
             _service = service;
-        
+            _category = category;
+        }
+        public User User { get; set; }
+        public List<Recipe> Recipes { get; set; }
+        public List<Category> Categories { get; set; }
+        public void OnGet()
+        {
+            GetUser();
+            Recipes= _service.RetrieveAll();
+            Categories = _category.RetrieveAll();
         }
 
-       public Recipe Recipe { get; set; } 
-     
-        public void OnGet(int id)
-        {
-           
-            GetUser();
-            Recipe = _service.Retrieve(id);
-            if (Recipe.IsApproved == false)
-            {
-                TempData["alert"] = "Successfuly";
-            }
-          
-            
-        }
         private void GetUser()
         {
             string user = HttpContext.Session.GetString("user");

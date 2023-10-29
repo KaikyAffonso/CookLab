@@ -26,9 +26,9 @@
                     <th scope="row">@ingredient.Id</th>
                     <td>@ingredient.Name</td>
                     <td>
-                        <a asp-page="/Ingredients/Update" asp-route-id="@ingredient.Id"><button type="button" class="btn btn-primary btn-sm">Update</button></a> /
-                        <a asp-page="/Ingredients/Delete" asp-route-id="@ingredient.Id"><i class="fa-solid fa-trash"></i> Delete</a> /
-                        <a asp-page="/Ingredients/Retrieve" asp-route-id="@ingredient.Id"><img width="25" height="25" src="https://img.icons8.com/dusk/64/ophthalmology.png" alt="ophthalmology" /></a>
+                        <a asp-page="/Ingredients/Update" asp-route-id="@ingredient.Id"><i class="fa-regular fa-pen-to-square"></i> </a> /
+                        <a asp-page="/Ingredients/Delete" asp-route-id="@ingredient.Id"><i class="fa-solid fa-trash"></i></a> /
+                        <a asp-page="/Ingredients/Retrieve" asp-route-id="@ingredient.Id"><i class="fa-solid fa-eye"></i></a>
                     </td>
                 </tr>
             }

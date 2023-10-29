@@ -58,7 +58,7 @@ namespace CookLab.Repository.Users
             int isBlocked = user.IsBlocked ? 1 : 0;
             string sql = $"UPDATE {tableName} SET" +
                 $" username = '{user.Username}'," +
-                $" password = CONVERT(VARCHAR(32), HashBytes('MD5', '{user.Password}'), 2)," +
+             
                 $" name = '{user.Name}'," +
                 $" email = '{user.Email}'," +
                 $" is_admin = '{isAdmin}'," +
