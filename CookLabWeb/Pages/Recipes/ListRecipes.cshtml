@@ -4,23 +4,23 @@
 }
 
 <h1>Awaits approval</h1>
+<div class="col">
 
-
-@foreach (var recipes in Model.Recipes)
-{
-    if (recipes.IsApproved == false)
+    @foreach (var recipes in Model.Recipes)
     {
-        <div class="col">
+        if (recipes.IsApproved == false)
+        {
 
-            <div class="card" style="width: 18rem;">
+
+            <div class="card" style="width: 18rem; display:inline-block;">
                 @if (recipes.Image.Equals(""))
                 {
-                    <img src="/img/noimg.jpg" class="card-img-top" alt="...">
+                    <img height="159" width="155" src=" /img/noimg.jpg" class="card-img-top" alt="...">
                 }
                 else
                 {
-                    
-                    <img src="/img/@recipes.Image" class="card-img-top" alt="...">
+
+                    <img height="159" width="155" src="/img/@recipes.Image" class="card-img-top" alt="...">
                 }
                 <div class="card-body">
                     <h5 class="card-title">@recipes.Title</h5>
@@ -28,10 +28,11 @@
                     <a class="btn btn-primary" asp-page="/Recipes/UpdateRecipe" asp-route-id="@recipes.Id"><i class="fa-regular fa-pen-to-square"></i> Edit </a>
                     <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipes.Id"> View </a>
                     <a class="btn btn-primary" asp-page="/Recipes/Delete" asp-route-id="@recipes.Id"> Delete </a>
-                    
+
                 </div>
 
             </div>
-        </div>
+
+        }
     }
-}
+</div>

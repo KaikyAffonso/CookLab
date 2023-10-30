@@ -25,12 +25,20 @@
                 <td>@users.Username</td>
                 <td>@users.Email</td>
                 <td>@users.IsAdmin</td>
-                <td>@users.IsBlocked</td>
+                <td>
+                    @if (users.IsBlocked == true)
+                    {
+                        <a class="btn btn-primary btn-sm" asp-page="/Users/Approve" asp-route-id="@users.Id"> Unblock user </a>
+                    }else{
+                    
+                    @users.IsBlocked}</td>
 
                 <td>
                     <a asp-page="/Users/Update" asp-route-id="@users.Id"><i class="fa-regular fa-pen-to-square"></i> </a> /
                     <a asp-page="/Users/Delete" asp-route-id="@users.Id"><i class="fa-solid fa-trash"></i></a> /
                     <a asp-page="/Users/Retrieve" asp-route-id="@users.Id"><i class="fa-solid fa-eye"></i></a>
+
+                  
                 </td>
             </tr>
         }

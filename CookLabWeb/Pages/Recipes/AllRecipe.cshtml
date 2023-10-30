@@ -10,7 +10,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }*@
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+<div class="d-flex justify-content-center align-items-center" style="height: 100%; width:100%;">
     <div class="shadow p-3 mb-5 bg-body-tertiary rounded w-75">
         <div style=" align-items:center;">
             @if (TempData["alert"] != null)
@@ -57,7 +57,10 @@
                     }
                 </tbody>
             </table>
-            <p>@Model.Recipe.PrepMethod</p>
+         @*   <p>@Model.Recipe.PrepMethod</p>*@
+
+         
+            <div style="height: 100%; width:100%;">@Html.Raw(Model.Recipe.PrepMethod)</div>
 
             @if (Model.User is null)
             {

@@ -60,7 +60,7 @@
                             {
 
                                 <div class="p-2 border" style="margin-left: 4%;">
-                                    <div class="card" style="height: 20em; width:15em; margin-bottom:2%;">
+                                    <div class="card" style="height: 22em; width:16em; margin-bottom:2%;">
                                         @if (recipe.Image.Equals(""))
                                         {
                                             <img height="159" width="155" src="/img/noimg.jpg" class="card-img-top" alt="...">
@@ -70,9 +70,9 @@
                                             <img height="159" width="155" src="/img/@recipe.Image" class="card-img-top" alt="...">
                                         }
                                         <div class="card-body">
-                                            <h5 class="card-title">@recipe.Title</h5>
+                                            <h8 class="card-title"><strong>@recipe.Title</strong></h8>
                                             <p class="card-text">@recipe.PrepTime Minutes</p>
-
+                                            <p><strong>BY: </strong> @recipe.Author.Name</p>
                                             <a class="btn btn-primary" asp-page="/Recipes/AllRecipe" asp-route-id="@recipe.Id"> View </a>
 
 
@@ -116,17 +116,18 @@
                         <h5>Welcome administrator @Model.User.Name !</h5>
                         <a class="btn btn-primary" asp-page="/Admin/Admin" asp-route-id=""><i class="fa-solid fa-gear"></i>  settings </a>
                     }
-                  
-                    else
+                    if (Model.User.IsBlocked == true)
                     {
-                        if (Model.User.IsBlocked == true)
-                        {
-                            <h5>Welcome Chef @Model.User.Name !</h5>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                Wait for your registration to be approved by one of our administrators
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        }
+                        <h5>Welcome Chef @Model.User.Name !</h5>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Wait for your registration to be approved by one of our administrators
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                  
+                    if(Model.User.IsBlocked == false && Model.User.IsAdmin == false)
+                    {
+                      
                         <h5>Welcome Chef @Model.User.Name !</h5>
                         <a class="btn btn-primary" asp-page="/Recipes/Recipe" asp-route-id=""><i class="fa-regular fa-pen-to-square"></i> Create a Recipe! </a>
 
